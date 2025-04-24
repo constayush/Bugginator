@@ -1,6 +1,6 @@
 # 🚀 bugginator – Dev Issue Tracker for Teams & Projects
 
-TrackForge is a full-stack, scalable issue tracking system built for modern dev teams. From managing bugs and tasks to visualizing progress on a slick Kanban board – it's like Jira and GitHub Issues had a smarter baby.
+Bugginator is a full-stack, scalable issue tracking system built for modern dev teams. From managing bugs and tasks to visualizing progress on a slick Kanban board – it's like Jira and GitHub Issues had a smarter baby.
 
 ## 🧩 Features
 
