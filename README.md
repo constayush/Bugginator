@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# 🚀 bugginator – Dev Issue Tracker for Teams & Projects
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TrackForge is a full-stack, scalable issue tracking system built for modern dev teams. From managing bugs and tasks to visualizing progress on a slick Kanban board – it's like Jira and GitHub Issues had a smarter baby.
 
-Currently, two official plugins are available:
+## 🧩 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Auth**: JWT-based auth with Role-Based Access Control (Admin, Developer, Tester, Guest)
+- **Project Management**: Create, manage, and filter multiple projects
+- **Invite Team**: Add teammates via email with role assignment
+- **Project Roles**: Owner, Contributor, Viewer roles per project
+- **Issue Tracking**: Full CRUD for bugs, tasks, and features
+- **Issue Fields**: Title, Description, Priority, Status, Tags, Assignee, Due Date
+- **Status Options**: Open, In Progress, Blocked, Resolved, Closed
+- **Activity Log**: See who did what and when (GitHub-style)
+- **Comments & Mentions**: Markdown support with @mentions and notifications
+- **Kanban Board**: Drag & drop interface with filters by user, tag, status, etc.
+- **Responsive UI**: Mobile-first, PWA-ready with TailwindCSS theming
+- **Password Reset**: Magic link/token-based reset flow
+- **Dark Mode** (🌙): Tailwind-based theming
+- **Email Notifications**: Issue updates & mentions via SendGrid/Nodemailer
+- **Slack/Discord Webhooks**: Real-time alerts for issue changes
+- **File Uploads**: Attach logs, screenshots, etc. via Cloudinary/Firebase
+- **Export to PDF/CSV**: Generate project and issue summaries
+- **Analytics Tab**: Charts for open issues, resolution times, active devs
 
-## Expanding the ESLint configuration
+### 🧠 Advanced Add-ons (I'll try for these but its not priority yet))
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **ElasticSearch**: Blazing fast issue search
+- **Time Tracking**: Built-in timers for task durations
+- **AI Summarizer**: TL;DR for long issue descriptions
+- **ML-based Priority Predictor**: Suggests priority based on content
 
-- Configure the top-level `parserOptions` property like this:
+## ⚙️ Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Frontend
+- React.js
+- TailwindCSS
+- Zustand / Redux
+- Framer Motion
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Backend
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT Auth + Bcrypt
+- Cloudinary / Firebase (for uploads)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### DevOps
+- Vercel (Frontend)
+- Render / Fly.io (Backend)
+- MongoDB Atlas (Cloud DB)
+- SendGrid / Nodemailer (Email)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+-------------------------------------------------------------------------------------------------------------
+
