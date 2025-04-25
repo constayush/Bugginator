@@ -5,7 +5,7 @@ function LoginButton() {
     <button className='h-fit w-fit '>
 <a
       role="button"
-      className="group relative border border-[#ffffff62] inline-flex items-center justify-center text-base rounded-xl bg-black/55 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-black hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
+      className="group relative  inline-flex items-center justify-center text-base rounded-xl hover:text-white px-8 py-3 font-semibold border transition-all duration-200 hover:bg-black hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
       title="payment"
       href="#"
       >Login<svg
@@ -14,7 +14,7 @@ function LoginButton() {
         height="10"
         width="10"
         fill="none"
-        className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+        className="mt-0.5 ml-2 -mr-1 stroke-[var(--primary-text-color)] group-hover:stroke-white stroke-2"
       >
         <path
           d="M0 5h7"

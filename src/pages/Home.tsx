@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import heroTeam from "../assets/hero-team.svg"
-import LoginButton from "../ui/LoginButton"
-import SignupButton from "../ui/SignupButton"
+import { motion } from "framer-motion";
+import heroTeam from "../assets/hero-team.svg";
+import LoginButton from "../ui/LoginButton";
+import SignupButton from "../ui/SignupButton";
 
 function Home() {
   // Animation variants
@@ -16,7 +16,7 @@ function Home() {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -29,7 +29,7 @@ function Home() {
         damping: 12,
       },
     },
-  }
+  };
 
   const imageVariants = {
     hidden: { x: 100, opacity: 0 },
@@ -43,7 +43,7 @@ function Home() {
         delay: 0.6,
       },
     },
-  }
+  };
 
   const buttonContainerVariants = {
     hidden: { opacity: 0 },
@@ -54,7 +54,7 @@ function Home() {
         delayChildren: 1,
       },
     },
-  }
+  };
 
   const buttonVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -75,11 +75,11 @@ function Home() {
         damping: 10,
       },
     },
-  }
+  };
 
   return (
-    <div className="min-h-screen w-full">
-      <main className="mx-auto max-w-7xl px-4 pt-24 sm:px-6 sm:pt-32 lg:px-8">
+    <div className="min-h-screen w-full flex flex-col items-center">
+      <main className=" relative flex flex-col justify-center items-center max-w-6xl pt-12 px-2 z-0">
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:justify-between">
           <motion.div
             className="max-w-full lg:max-w-[55%]"
@@ -87,27 +87,43 @@ function Home() {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div className="space-y-6" variants={containerVariants}>
+            <motion.div
+              className="space-y-6 text-center md:text-left"
+              variants={containerVariants}
+            >
               <motion.h1
-                className="bg-gradient-to-t from-[#c0f9ef] via-[#fff] to-[#dea5f9] bg-clip-text text-6xl font-extrabold tracking-tight text-transparent sm:text-7xl md:text-8xl"
+                className="bg-gradient-to-t from-[var(--primary-text-color)] via-[var(--primary-text-color)] to-[#dea5f9] bg-clip-text text-5xl font-extrabold tracking-tight text-transparent sm:text-7xl md:text-8xl"
                 variants={itemVariants}
               >
                 Bugginator
               </motion.h1>
-
-              <motion.p className="text-xl font-medium text-slate-700 dark:text-slate-300" variants={itemVariants}>
-                An issue tracker built for modern dev teams — powerful, flexible, and actually fun to use.
+            
+              <motion.p
+                className="text-xl font-medium text-slate-700 dark:text-slate-300"
+                variants={itemVariants}
+              >
+                An issue tracker built for modern dev teams — powerful,
+                flexible, and actually fun to use.
               </motion.p>
 
-              <motion.div className="h-px w-24 bg-gradient-to-r from-purple-500 to-blue-500" variants={itemVariants} />
+              <motion.div
+                className="h-px w-24 bg-gradient-to-r from-purple-500 to-blue-500"
+                variants={itemVariants}
+              />
 
-              <motion.p className="text-lg text-slate-600 dark:text-slate-400" variants={itemVariants}>
-                Everything your team needs in one place: Kanban boards, comments, role-based access, activity logs, and
-                more
+              <motion.p
+                className="text-lg text-slate-600 dark:text-slate-400"
+                variants={itemVariants}
+              >
+                Everything your team needs in one place: Kanban boards,
+                comments, role-based access, activity logs, and more
               </motion.p>
             </motion.div>
 
-            <motion.div className="mt-10 flex flex-wrap gap-4" variants={buttonContainerVariants}>
+            <motion.div
+              className="mt-10 flex flex-wrap gap-4 "
+              variants={buttonContainerVariants}
+            >
               <motion.div variants={buttonVariants} whileHover="hover">
                 <SignupButton />
               </motion.div>
@@ -119,7 +135,7 @@ function Home() {
           </motion.div>
 
           <motion.div
-            className="relative border-4 rounded-lg border-[#ffffff2f] w-full max-w-md lg:max-w-[45%]"
+            className="relative border-4 rounded-lg border-[#ffffff1f] shadow-2xl w-full max-w-md lg:max-w-[45%]"
             initial="hidden"
             animate="visible"
             variants={imageVariants}
@@ -148,7 +164,7 @@ function Home() {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
