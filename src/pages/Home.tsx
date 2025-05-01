@@ -210,9 +210,9 @@ function Home() {
   
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center bg-[var(--bg-color)] text-[var(--primary-text-color)] scroll-smooth">
+    <div className="min-h-screen w-full flex flex-col items-center text-[var(--primary-text-color)] scroll-smooth">
 
-      <main className="relative flex flex-col justify-center items-center max-w-6xl pt-12 px-4 md:px-6 z-0 bg-[var(--bg-color)]">
+      <main className="relative flex flex-col justify-center items-center max-w-6xl pt-12 px-4 md:px-6 z-0 ">
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:justify-between">
           <motion.div
             className="max-w-full lg:max-w-[55%]"

@@ -21,14 +21,30 @@ function Login() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Logging in with:", formData);
-    // TODO: Add your login logic here
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+  
+    try {
+      const res = await fetch("http://localhost:1234/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await res.json();
+      console.log("Response:", data);
+    } catch (err) {
+      console.error("Error while logging in:", err);
+    }
   };
 
   return (
-    <div className="w-full flex items-center justify-center  bg-[var(--bg-color)">
+    <div className="w-full flex items-center justify-center  ">
+      <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20"></div>
       <div className=" relative flex flex-col justify-center items-center max-w-xl w-full pt-12 px-2 z-0 ]">
         <motion.div
           className=" rounded-xl w-full p-8 shadow-2xl bg-[var(--container-color)] border border-gray-200 dark:border-gray-700"
@@ -65,6 +81,7 @@ function Login() {
                 value={formData.password}
                 onChange={handleChange}
               />
+              <p className="text-xs mt-1 underline cursor-pointer">forgot password?</p>
             </div>
 
             <motion.button
