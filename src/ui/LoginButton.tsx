@@ -1,13 +1,13 @@
-
+import { Link } from "react-router"
 
 function LoginButton() {
   return (
     <button className='h-fit w-fit '>
-<a
+<Link
       role="button"
       className="group relative  inline-flex items-center justify-center text-base rounded-xl hover:text-white px-8 py-3 font-semibold border transition-all duration-200 hover:bg-black hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
       title="payment"
-      href="#"
+      to="/login"
       >Login<svg
         aria-hidden="true"
         viewBox="0 0 10 10"
@@ -25,7 +25,7 @@ function LoginButton() {
           className="transition group-hover:translate-x-[3px]"
         ></path>
       </svg>
-    </a></button>
+    </Link></button>
   )
 }
 
