@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import successImg from "../assets/success.svg";
 import { useState } from "react";
 import LoginButton from "../ui/LoginButton";
-
+import SignupButton from "../ui/SignupButton";
+import axios from "axios";
 function Signup() {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,7 +12,7 @@ function Signup() {
     password: "",
   });
 
-  const [backendResponse, setBackendResponse] = useState(null);
+  const [backendResponse, setBackendResponse] = useState("");
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -33,45 +34,60 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:1234/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      setBackendResponse(data.message);
+      const res = await axios.post(
+        "http://localhost:1234/user/register",
+        formData
+      );
+      setBackendResponse(res.data.message);
     } catch (err) {
       console.error("Error while signing in:", err);
+      setBackendResponse("error");
     }
   };
 
   return (
     <>
       {backendResponse ? (
-        <motion.div 
-        initial={ {opacity: 0 , filter: "blur(5px)", y: 20} }
-        transition={{duration: 1, ease: "easeInOut"}}
-        animate={{opacity: 1 , filter: "blur(0px)", y: 0}}
-       
-        className="w-full h-fit my-24 absolute flex flex-col items-center gap-8 justify-center z-99 ">
-          <div className="flex justify-center items-center gap-8">
-            <img
-              className="w-20 animate-pulse"
-              src={successImg}
-              alt="success"
-            />
-            <h1 className="text-xl">{backendResponse}</h1>
-          </div>
-          <div className="flex justify-center items-center gap-8">
-            <p className="text-lg">Please login to continue</p>
-         
-       
-            <LoginButton />
-          </div>
-        </motion.div>
+        backendResponse === "User Registered Successfully!" ? (
+          <motion.div
+            initial={{ opacity: 0, filter: "blur(5px)", y: 20 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            className="w-full h-fit my-24 absolute flex flex-col items-center gap-8 justify-center z-99 "
+          >
+            <div className="flex justify-center items-center gap-8">
+              <img
+                className="w-20 animate-pulse"
+                src={successImg}
+                alt="success"
+              />
+              <h1 className="text-xl">{backendResponse}</h1>
+            </div>
+            <div className="flex justify-center items-center gap-8">
+              <p className="text-lg">Please login to continue</p>
+
+              <LoginButton />
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, filter: "blur(5px)", y: 20 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            className="w-full h-fit my-24 absolute flex flex-col items-center gap-8 justify-center z-99 "
+          >
+            <h1 className="text-3xl"> ⚠️ error while signing up </h1>
+
+            <div className="flex justify-center items-center gap-8">
+            <p className="text-lg">Please try again</p>
+              <button onClick={() => window.location.reload()}>
+                <SignupButton />
+              </button>
+            </div>
+
+
+          </motion.div>
+        )
       ) : (
         <div className="w-full h-full flex items-center justify-center relative">
           <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20"></div>

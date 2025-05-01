@@ -1,19 +1,24 @@
 
+const registerUser = (req, res) => {
 
-const registerUser = (req, res)=>{ 
-
-    
-    res.json({ message: "User Registered Successfully!"
+    res.json({
+        success: true,
+        message: "User Registered Successfully!"
     })
 
 }
-const loginUser = ()=>{ 
-     
+const loginUser = (req, res) => {
+
+    res.json({
+        success: true,
+        message: "User Logged In Successfully!"
+    })
 
 }
-const allUsers = ()=>{ 
-     
-    
+const allUsers = () => {
+
+
+
 }
 
 export { registerUser, loginUser, allUsers };
