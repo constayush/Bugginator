@@ -12,6 +12,7 @@ import Analytics from "./dashboard_tabs/Analytics";
 import Notifications from "./dashboard_tabs/Notifications";
 
 import Index from "./dashboard_tabs/Index";
+import Account from "./dashboard_tabs/Accounts";
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +30,7 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="notifications" element={<Notifications />} />
         </Route>
+        <Route path="/account" element={<Account/>} />
       </Routes>
     </BrowserRouter>
   );
