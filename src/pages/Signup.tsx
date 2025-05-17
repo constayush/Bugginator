@@ -27,6 +27,9 @@ function Signup() {
     },
   };
 
+  const handleKeyDown = ()=>{
+    console.log("pressed")
+  }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -38,7 +41,7 @@ function Signup() {
         "http://localhost:1234/user/register",
         formData
       );
-      setBackendResponse(res.data.message);
+      setBackendResponse(res.data.success);
     } catch (err) {
       console.error("Error while signing in:", err);
       setBackendResponse("error");
@@ -48,7 +51,7 @@ function Signup() {
   return (
     <>
       {backendResponse ? (
-        backendResponse === "User Registered Successfully!" ? (
+        backendResponse ? (
           <motion.div
             initial={{ opacity: 0, filter: "blur(5px)", y: 20 }}
             transition={{ duration: 1, ease: "easeInOut" }}
@@ -57,14 +60,14 @@ function Signup() {
           >
             <div className="flex justify-center items-center gap-8">
               <img
-                className="w-20 animate-pulse"
+                className="w-40 animate-pulse"
                 src={successImg}
                 alt="success"
               />
               <h1 className="text-xl">{backendResponse}</h1>
             </div>
             <div className="flex justify-center items-center gap-8">
-              <p className="text-lg">Please login to continue</p>
+              <p className="text-2xl">Please login to continue</p>
 
               <LoginButton />
             </div>
@@ -89,7 +92,7 @@ function Signup() {
           </motion.div>
         )
       ) : (
-        <div className="w-full h-full flex items-center justify-center relative">
+        <div onKeyDown={handleKeyDown} className="w-full h-full flex items-center justify-center relative">
           <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20"></div>
           <div className="relative  flex flex-col justify-center items-center max-w-xl w-full pt-12 px-2 z-0 ">
             <motion.div

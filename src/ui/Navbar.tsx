@@ -25,14 +25,12 @@ function Navbar() {
           <a href='/'><h1 className="logo font-bold text-lg">BUGGINATOR</h1></a>
   
           <ul className="hidden md:flex gap-4">
-            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-500 " to="/">Home</Link>
-            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-500 " to="/">Features</Link>
-            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-500 " to="/">Contact</Link>
+            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-300 " to="/login">Login</Link>
+            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-300 " to="/signup">Sign Up</Link>
+            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-300 " to="/">Contact</Link>
           </ul>
   
           <ul className="cta hidden md:flex gap-4 items-center">
-           <Link className='' to='/signup'><button className="border border-white rounded-lg hover:bg-[#ffffff28] hover:underline hover:font-bold underline-offset-2  transition-all w-full h-full p-2">Sign Up</button></Link>
-           <Link className='' to='/login'> <button className="border border-white rounded-lg hover:bg-[#ffffff28] hover:underline hover:font-bold underline-offset-2  transition-all w-full h-full p-2">Login    </button></Link>
             <ThemeToggle />
           </ul>
         </div>
