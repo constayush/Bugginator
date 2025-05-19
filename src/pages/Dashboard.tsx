@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import ThemeToggle from "../ui/ThemeToggleButton";
 function Dashboard() {
-  const [activeTab, setActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState("");
 
   const sidebarItems = [
     { id: "", icon: FolderKanban, label: "Dashboard" },
@@ -50,7 +50,7 @@ function Dashboard() {
             <span className="hidden md:inline">{item.label}</span>
           </Link>
         ))}
- <Link
+        <Link
           to="/account"
           className={`flex items-center gap-3 text-sm md:text-base text-left px-3 py-2 
             rounded-md hover:bg-purple-500/10 transition
@@ -67,8 +67,6 @@ function Dashboard() {
         </Link>
 
         <ThemeToggle />
-
-       
       </aside>
 
       {/* Main Content */}

@@ -11,7 +11,6 @@ app.use(express.json());
 import userRoutes from "./routes/userRoutes.js";
 
 
-
 app.use("/user", userRoutes);
 
 
