@@ -20,7 +20,6 @@ Bugginator is a full-stack, scalable issue tracking system built for modern dev 
 - **Email Notifications**: Issue updates & mentions via SendGrid/Nodemailer
 - **Slack/Discord Webhooks**: Real-time alerts for issue changes
 - **File Uploads**: Attach logs, screenshots, etc. via Cloudinary/Firebase
-- **Export to PDF/CSV**: Generate project and issue summaries
 - **Analytics Tab**: Charts for open issues, resolution times, active devs
 
 ### 🧠 Advanced Add-ons (I'll try for these but its not priority yet))
