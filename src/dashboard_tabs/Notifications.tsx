@@ -26,8 +26,8 @@ function Notifications() {
   ];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-4xl font-bold text-[var(--primary-text-color)] flex items-center gap-3">
+    <div className="space-y-6 mt-[4rem] md:mt-0 p-3 md:p-0">
+      <h1 className="text-3xl md:text-4xl font-bold text-[var(--primary-text-color)] flex items-center gap-3">
         <Bell size={38} className="text-purple-400" />
         Notifications
       </h1>

@@ -26,13 +26,13 @@ const dummyTasks = [
 
 export default function Tasks() {
   return (
-    <div className="w-full h-[200vh] space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="w-full h-[200vh] space-y-6  mt-[4rem] md:mt-0 p-3 md:p-0">
+      <div className="flex flex-wrap gap-6 items-center justify-between">
          <h2 className="text-4xl font-bold flex items-center gap-3 text-[var(--primary-text-color)]">
         <ClipboardCheck  className="text-purple-500" size={38}/>
         Your Tasks
       </h2>
-        <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 !text-white rounded-md shadow">
+        <button className="flex grow-1 justify-center items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 !text-white rounded-md shadow">
           <PlusCircle size={18} /> New Task
         </button>
       </div>

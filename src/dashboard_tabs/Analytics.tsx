@@ -2,11 +2,11 @@ import { BarChart2, Activity, PieChart} from "lucide-react";
 
 function Analytics() {
   return (
-    <div className="w-full h-full p-4 md:p-6">
+    <div className="w-full h-full  mt-[4rem] md:mt-0 p-3 md:p-0">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Heading */}
         <div>
-          <h1 className="text-4xl flex gap-3 font-bold text-[var(--primary-text-color)]">
+          <h1 className="text-3xl md:text-4xl flex gap-3 font-bold text-[var(--primary-text-color)]">
             <BarChart2
              className="text-purple-500" size={38} />
             Analytics Dashboard

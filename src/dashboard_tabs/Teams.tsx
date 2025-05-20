@@ -15,10 +15,10 @@ function Teams() {
   };
 
   return (
-    <div className="w-full h-full p-4 md:p-6">
+    <div className="w-full h-full  mt-[4rem] md:mt-0 p-3 md:p-0">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap gap-3 items-center justify-between">
           <div>
             <h1 className="text-4xl font-bold text-gradient flex gap-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">
              <User2  className="text-purple-500" size={38} /> Teams 
@@ -28,11 +28,11 @@ function Teams() {
             </p>
           </div>
 
-          <div className="flex gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 !text-white rounded-xl transition">
+          <div className="flex flex-wrap   gap-3">
+            <button className="flex items-center grow-1 text-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 !text-white rounded-xl transition">
               <Plus size={18} /> Create Team
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 !text-white rounded-xl transition">
+            <button className="flex items-center grow-1 text-center  justify-center gap-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 !text-white rounded-xl transition">
               <UserPlus size={18} /> Join Team
             </button>
           </div>

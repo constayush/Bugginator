@@ -8,13 +8,16 @@ import {
   Users2,
   Bug,
   User,
+  ArrowRightCircleIcon,
+  ArrowRightCircle,
+  ArrowLeftCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import ThemeToggle from "../ui/ThemeToggleButton";
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("");
-
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const sidebarItems = [
     { id: "", icon: FolderKanban, label: "Dashboard" },
     { id: "projects", icon: FolderKanban, label: "Projects" },
@@ -26,10 +29,22 @@ function Dashboard() {
   ];
 
   return (
-    <div className="flex min-h-screen w-full h-full relative">
+    <div className="flex min-h-screen justify-center w-full h-full relative">
       {/* Sidebar */}
-      <aside className="w-20 pt-[3rem] md:w-60 text-[var(--primary-text-color)]  sticky self-start top-0 border-r bg-[#9d00ff07] h-screen border-gray-300 dark:border-gray-700 flex flex-col p-4 space-y-4">
-        <h1 className="text-2xl">Bugginator</h1>
+      <aside
+        className={` min-w-20 pt-[4rem] md:pt-[3rem] lg:w-60 text-[var(--primary-text-color)]  
+        md:sticky self-start top-0 border-r md:bg-[#9d00ff07] h-screen border-gray-300
+         dark:border-gray-700 md:flex flex-col p-4 space-y-4
+         
+         ${
+           isSidebarVisible
+             ? "flex fixed top-0 left-0 z-[99] bg-[var(--mobile-sidebar-bg-color)]  backdrop-blur-[2px]"
+             : "hidden"
+         }
+         
+         `}
+      >
+        <h1 className="text-2xl hidden md:block">Bugginator</h1>
 
         {sidebarItems.map((item) => (
           <Link
@@ -47,7 +62,7 @@ function Dashboard() {
             `}
           >
             <item.icon className="text-purple-400" />
-            <span className="hidden md:inline">{item.label}</span>
+            <span className=" inline">{item.label}</span>
           </Link>
         ))}
         <Link
@@ -69,9 +84,19 @@ function Dashboard() {
         <ThemeToggle />
       </aside>
 
+      <nav className="border py-2 px-6 backdrop-blur-[5px] flex flex-row-reverse justify-between w-[80%] bg-[var(--mobile-sidebar-bg-color)]  md:hidden m-3  rounded-xl fixed z-[999] ">
+        <h1>Bugginator</h1>
+        <button
+          onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+         
+        >
+          {isSidebarVisible? <ArrowLeftCircle/> : <ArrowRightCircle/>}
+
+        </button>
+      </nav>
       {/* Main Content */}
 
-      <main className="flex-1 overflow-y-auto  p-[5rem] ">
+      <main className="flex-1 overflow-y-auto p-[0rem] md:p-[1rem] lg:p-[5rem] ">
         <Outlet />
       </main>
     </div>

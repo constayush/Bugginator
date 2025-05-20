@@ -19,10 +19,10 @@ function Index() {
     },
   };
   return (
-  <div className="flex-1 p-6 h-full  relative overflow-y-auto">
+  <div className="flex-1 p-3 md:p-6 h-full  relative overflow-y-auto">
       
         <motion.div
-          className="relative flex flex-col gap-6 w-full max-w-6xl mx-auto p-6 md:p-8 rounded-xl shadow-2xl bg-[var(--container-color)] border border-gray-200 dark:border-gray-700 z-10"
+          className="relative flex flex-col mt-[3.5rem] md:mt-0 gap-6 w-full max-w-6xl mx-auto p-3 md:p-8 rounded-xl shadow-2xl bg-[var(--container-color)] border border-gray-200 dark:border-gray-700 z-10"
           initial="hidden"
           animate="visible"
           variants={containerVariants}

@@ -23,7 +23,7 @@ const mockProjects = [
 
 function Projects() {
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-6 mt-[4rem] md:mt-0 p-3 md:p-0" >
       <h2 className="text-4xl font-bold flex items-center gap-3 text-[var(--primary-text-color)]">
         <FolderKanban className="text-purple-500" size={38} />
         Projects
