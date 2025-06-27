@@ -27,8 +27,8 @@ function Index() {
           animate="visible"
           variants={containerVariants}
         >
-          <h1 className="text-2xl md:text-3xl font-extrabold text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-            Welcome to Your Dashboard ✨
+          <h1 className="text-2xl md:text-4xl  text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+            Good to see you, Ayush! ✨
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

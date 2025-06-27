@@ -8,10 +8,10 @@ connectDB(); //connect to database
 import cors from "cors";
 app.use(cors()); 
 app.use(express.json());
-import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 
-app.use("/user", userRoutes);
+app.use("/auth", authRoutes);
 
 
 app.listen(process.env.PORT || 3000, () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { LogOut, User, Mail, Lock, Upload } from "lucide-react";
-
+import { LogOut, User, Mail, Lock, Upload, X } from "lucide-react";
+import { Link } from "react-router";
 function Account() {
   const [name, setName] = useState("John Doe");
   const [email, setEmail] = useState("johndoe@example.com");
@@ -11,7 +11,9 @@ function Account() {
   };
 
   return (
-    <div className="max-w-xl mx-auto px-6 py-10">
+    <div className="max-w-xl mx-auto px-6 py-10 relative">
+
+      <Link className="absolute top-10 rounded-full border p-1 right-6 hover:opacity-90 hover:text-[var(--primary-color)] text-red-500" to="/dashboard"><X></X></Link>
       <h1 className="text-4xl font-bold mb-8 text-[var(--primary-text-color)]">Account Settings</h1>
 
       {/* Avatar Upload */}

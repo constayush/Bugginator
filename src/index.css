@@ -1,36 +1,40 @@
 @import "tailwindcss";
-
 :root {
-  --bg-color: #f6f6f6;
-  --primary-text-color: #000000;
-  --secondary-text-color: #1a1a1a;
-  --navbar-bg-color: #f5f5f5;
-  --container-color: #8c00f70b;
-  --gradient-start: #9333ea;
-  --gradient-end: #3b82f6;
-  --card-bg-color: #ffffff;
-  --card-border-color: #e5e7eb;
-  --card-hover-shadow: 0 20px 25px -5px rgba(115, 0, 255, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --dash-card-bg-color: #ffffff6c;
-  --box-shadow-color: rgba(0, 0, 0, 0.05);
-  --mobile-sidebar-bg-color: #f2ebfac6;
+  --bg-color: hsl(289, 65%, 98%);
+  --primary-text-color: hsl(0, 0%, 0%);
+  --secondary-text-color: hsl(0, 0%, 10%);
+  --navbar-bg-color: hsl(0, 0%, 96%);
+  --container-color: hsla(274, 100%, 48%, 0.04);
+  --gradient-start: hsl(271, 81%, 56%);
+  --gradient-end: hsl(217, 91%, 60%);
+  --card-bg-color: hsl(0, 0%, 100%);
+  --card-border-color: hsl(220, 13%, 91%);
+  --card-hover-shadow: 0 20px 25px -5px hsla(270, 100%, 50%, 0.1), 0 10px 10px -5px hsla(0, 0%, 0%, 0.04);
+  --dash-card-bg-color: hsla(0, 0%, 100%, 0.42);
+  --box-shadow-color: hsla(0, 0%, 0%, 0.05);
+  --mobile-sidebar-bg-color: hsla(268, 63%, 95%, 0.77);
+  --popup-bg-color: hsla(268, 100%, 95%, 0.42);
+  --border-color: hsl(220, 13%, 91%);
 }
 
 .dark {
-  --bg-color: #0b0b0b;
-  --primary-text-color: #ffffff;
-  --secondary-text-color: #c4c4c4;
-  --navbar-bg-color: #00000092;
-  --container-color: #8c00f706;
-  --gradient-start: #9333ea;
-  --gradient-end: #3b82f6;
-  --card-bg-color: #ffffff0c;
-  --card-border-color: #2e2e2e;
-  --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  --dash-card-bg-color: #ffffff20;
-    --box-shadow-color: rgba(255, 255, 255, 0.04);
-      --mobile-sidebar-bg-color: #0e0216e9;
+  --bg-color: hsl(0, 0%, 8%);
+  --primary-text-color: hsl(0, 0%, 100%);
+  --secondary-text-color: hsl(0, 0%, 77%);
+  --navbar-bg-color: hsla(0, 0%, 22%, 0.57);
+  --container-color: hsla(274, 100%, 48%, 0.02);
+  --gradient-start: hsl(271, 81%, 56%);
+  --gradient-end: hsl(217, 91%, 60%);
+  --card-bg-color: hsla(0, 0%, 100%, 0.05);
+  --card-border-color: hsl(0, 0%, 18%);
+  --card-hover-shadow: 0 20px 25px -5px hsla(0, 0%, 0%, 0.5), 0 10px 10px -5px hsla(0, 0%, 0%, 0.2);
+  --dash-card-bg-color: hsla(0, 0%, 100%, 0.12);
+  --box-shadow-color: hsla(0, 0%, 100%, 0.04);
+  --mobile-sidebar-bg-color: hsla(268, 92%, 5%, 0.91);
+  --popup-bg-color: hsla(0, 0%, 0%, 0.15);
+  --border-color: hsl(0, 0%, 100%);
 }
+
 
 /* Smooth scrolling */
 html {

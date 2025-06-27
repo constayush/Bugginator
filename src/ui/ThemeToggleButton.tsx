@@ -30,7 +30,7 @@ function ThemeToggle() {
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >  {theme === "dark" ? <Moon className="text-[var(--primary-text-color)] " size={20} /> : <Sun className="text-[var(--primary-text-color)]" size={20} />}</motion.div>
       </div>
-      <span className="hidden md:inline">
+      <span className="">
         {theme === "dark" ? "Dark Mode" : "Light Mode"}
       </span>
     </button>

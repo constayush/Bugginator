@@ -32,7 +32,7 @@ export default function Tasks() {
         <ClipboardCheck  className="text-purple-500" size={38}/>
         Your Tasks
       </h2>
-        <button className="flex grow-1 justify-center items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 !text-white rounded-md shadow">
+        <button className="flex grow-1 md:grow-0 justify-center items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 !text-white rounded-md shadow">
           <PlusCircle size={18} /> New Task
         </button>
       </div>

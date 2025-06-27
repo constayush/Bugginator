@@ -8,13 +8,13 @@ import {
   Users2,
   Bug,
   User,
-  ArrowRightCircleIcon,
-  ArrowRightCircle,
   ArrowLeftCircle,
+  ArrowRightCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import ThemeToggle from "../ui/ThemeToggleButton";
+import useSwipe from "../hooks/useSwipe";
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -27,19 +27,24 @@ function Dashboard() {
     { id: "analytics", icon: BarChart2, label: "Analytics" },
     { id: "teams", icon: Users2, label: "Teams" },
   ];
+  useSwipe(
+    () => setIsSidebarVisible(false), // swipe left to close
+    () => setIsSidebarVisible(true) // swipe right to open
+  );
 
   return (
     <div className="flex min-h-screen justify-center w-full h-full relative">
       {/* Sidebar */}
+
       <aside
         className={` min-w-20 pt-[4rem] md:pt-[3rem] lg:w-60 text-[var(--primary-text-color)]  
         md:sticky self-start top-0 border-r md:bg-[#9d00ff07] h-screen border-gray-300
-         dark:border-gray-700 md:flex flex-col p-4 space-y-4
+         dark:border-gray-700 md:flex flex-col p-4 space-y-4 transition-all duration-200
          
          ${
            isSidebarVisible
              ? "flex fixed top-0 left-0 z-[99] bg-[var(--mobile-sidebar-bg-color)]  backdrop-blur-[2px]"
-             : "hidden"
+             : "flex fixed top-0 left-[-200px] z-[99] bg-[var(--mobile-sidebar-bg-color)] backdrop-blur-[2px]"
          }
          
          `}
@@ -78,22 +83,23 @@ function Dashboard() {
             `}
         >
           <User className="text-purple-400" />
-          <span className="hidden md:inline">Account</span>
+          <span className="">Account</span>
         </Link>
 
         <ThemeToggle />
       </aside>
 
-      <nav className="border py-2 px-6 backdrop-blur-[5px] flex flex-row-reverse justify-between w-[80%] bg-[var(--mobile-sidebar-bg-color)]  md:hidden m-3  rounded-xl fixed z-[999] ">
-        <h1>Bugginator</h1>
-        <button
-          onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-         
-        >
-          {isSidebarVisible? <ArrowLeftCircle/> : <ArrowRightCircle/>}
+      <nav className="border py-2 px-6 backdrop-blur-[5px] gap-1 flex justify-between w-[95%] bg-[var(--mobile-sidebar-bg-color)]  md:hidden m-3  rounded-xl fixed z-[999] ">
+  
+          <button onClick={() => setIsSidebarVisible(!isSidebarVisible)}>
+            {isSidebarVisible ? <ArrowLeftCircle /> : <ArrowRightCircle />}
+          </button>
 
-        </button>
+        
+
+        <h1 onClick={() => window.location.reload()}>Bugginator</h1>
       </nav>
+
       {/* Main Content */}
 
       <main className="flex-1 overflow-y-auto p-[0rem] md:p-[1rem] lg:p-[5rem] ">
