@@ -273,7 +273,7 @@ function Teams() {
                 <input
                   type="text"
                   className="w-full px-4 py-2 border rounded-lg bg-white text-black shadow-sm"
-                  value={editedTeamName}
+                  // value={editedTeamName}
                   onChange={(e) => setTeamName(e.target.value)}
                 />
               </div>

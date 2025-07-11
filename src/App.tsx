@@ -13,15 +13,46 @@ import Notifications from "./dashboard_tabs/Notifications";
 
 import Index from "./dashboard_tabs/Index";
 import Account from "./dashboard_tabs/Accounts";
+import PrivateRoute from "./utils/PrivateRoute";
 function App() {
   return (
     <BrowserRouter>
- 
       <Routes>
-        <Route path="/" element={<><Navbar /><Home /></>} />
-        <Route path="/signup" element={<><Navbar /><Signup /></>} />
-        <Route path="/login" element={<><Navbar /><Login /></>} />
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <Home />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <Navbar />
+              <Signup />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <Navbar />
+              <Login />
+            </>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
           <Route index element={<Index />} />
           <Route path="teams" element={<Teams />} />
           <Route path="tasks" element={<Tasks />} />
@@ -30,7 +61,14 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="notifications" element={<Notifications />} />
         </Route>
-        <Route path="/account" element={<Account/>} />
+        <Route
+          path="/account"
+          element={
+            <PrivateRoute>
+              <Account />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

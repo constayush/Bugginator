@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { LogOut, User, Mail, Lock, Upload, X } from "lucide-react";
 import { Link } from "react-router";
+import { useAuth } from "../context/authContext";
+import { useNavigate } from "react-router";
 function Account() {
   const [name, setName] = useState("John Doe");
   const [email, setEmail] = useState("johndoe@example.com");
+ const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log("Logging out...");
-    // Your logout logic here
+    logout();
+    navigate("/login");
   };
+
 
   return (
     <div className="max-w-xl mx-auto px-6 py-10 relative">
