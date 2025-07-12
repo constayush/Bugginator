@@ -1,12 +1,9 @@
-import { useState } from "react";
-import { LogOut, User, Mail, Lock, Upload, X } from "lucide-react";
-import { Link } from "react-router";
+import { LogOut, Mail, User, Lock, X } from "lucide-react";
 import { useAuth } from "../context/authContext";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
+import { motion } from "framer-motion";
 function Account() {
-  const [name, setName] = useState("John Doe");
-  const [email, setEmail] = useState("johndoe@example.com");
- const { logout, user } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -14,81 +11,72 @@ function Account() {
     navigate("/login");
   };
 
+  const handlePasswordReset = () => {
+    alert("Password reset flow coming soon!");
+  };
 
   return (
-    <div className="max-w-xl mx-auto px-6 py-10 relative">
+    <motion.div
+    initial={{ opacity: 0, y: 50, overflowY: "hidden" }}
+      animate={{ opacity: 1, y: 0, overflowY: "auto" }}
+      transition={{ duration: 0.5 }}
+    className="flex justify-center items-center min-h-screen bg-[var(--background-color)] px-4 relative">
+      <div
+      
+      className="w-full md:max-w-2xl py-40 md:py-10 bg-[var(--container-color)] text-[var(--primary-text-color)] backdrop-blur-xl shadow-xl border border-[var(--border-color)] rounded-2xl p-8 space-y-6 transition-all">
+        <Link
+          to="/dashboard"
+          className="absolute top-6 right-6 p-2 rounded-full hover:bg-[var(--container-color)] border shadow-2xl  border-[#929292] transition z-99 text-red-500 hover:text-[var(--primary-color)]"
+          title="Back to Dashboard"
+        >
+          <X size={20} />
+        </Link>
+        <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] right-0 bg-gradient-to-r from-[#ff8080]/20 via-[#7dfce7]/20 to-[#b282ff]/20"></div>
+        <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20"></div>
+        {/* Header */}
+       
+        <div className="text-center">
+          <h1 className="text-3xl font-semibold">Account</h1>
+          <p className="text-sm text-[var(--secondary-text-color)] mt-1">
+            Manage your profile
+          </p>
+        </div>
 
-      <Link className="absolute top-10 rounded-full border p-1 right-6 hover:opacity-90 hover:text-[var(--primary-color)] text-red-500" to="/dashboard"><X></X></Link>
-      <h1 className="text-4xl font-bold mb-8 text-[var(--primary-text-color)]">Account Settings</h1>
+        {/* User Info */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <User size={22} className="text-[var(--icon-muted)]" />
+            <div>
+              <p className="font-medium text-xl">{user?.name || "User Name"}</p>
+            </div>
+          </div>
 
-      {/* Avatar Upload */}
-      <div className="flex items-center gap-6 mb-8">
-        <img
-          src="/default-avatar.png"
-          alt="User Avatar"
-          className="w-20 h-20 rounded-full border border-gray-300 object-cover"
-        />
-        <button className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
-          <Upload size={18} />
-          Change Avatar
-        </button>
-      </div>
+          <div className="flex items-center gap-3">
+            <Mail size={22} className="text-[var(--icon-muted)]" />
+            <div>
+              <p className="font-medium text-xl">{user?.email || "Email"}</p>
+            </div>
+          </div>
+        </div>
 
-      {/* Name Input */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-1 text-[var(--primary-text-color)]">Name</label>
-        <div className="flex items-center gap-2 border rounded-md px-3 py-2 bg-[var(--input-bg)]">
-          <User size={18} className="text-purple-500" />
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full bg-transparent outline-none text-sm"
-          />
+        {/* Actions */}
+        <div className="space-y-3 pt-6">
+          <button
+            onClick={handlePasswordReset}
+            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-md bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:opacity-90 transition"
+          >
+            <Lock size={18} /> Reset Password
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-md border border-red-400 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition"
+          >
+            <LogOut size={18} /> Logout
+          </button>
         </div>
       </div>
-
-      {/* Email Input */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-1 text-[var(--primary-text-color)]">Email</label>
-        <div className="flex items-center gap-2 border rounded-md px-3 py-2 bg-[var(--input-bg)]">
-          <Mail size={18} className="text-purple-500" />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-transparent outline-none text-sm"
-          />
-        </div>
-      </div>
-
-      {/* Change Password */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-1 text-[var(--primary-text-color)]">Password</label>
-        <div className="flex items-center gap-2 border rounded-md px-3 py-2 bg-[var(--input-bg)]">
-          <Lock size={18} className="text-purple-500" />
-          <input
-            type="password"
-            placeholder="••••••••"
-            className="w-full bg-transparent outline-none text-sm"
-          />
-        </div>
-      </div>
-
-      {/* Save Changes Button */}
-      <button className="w-full py-2 rounded-md bg-purple-600 text-white font-semibold hover:bg-purple-700 transition mb-4">
-        Save Changes
-      </button>
-
-      {/* Logout */}
-      <button
-        onClick={handleLogout}
-        className="flex items-center justify-center gap-2 w-full py-2 rounded-md border text-red-500 hover:bg-red-50 transition"
-      >
-        <LogOut size={18} />
-        Logout
-      </button>
-    </div>
+    </motion.div>
   );
 }
 

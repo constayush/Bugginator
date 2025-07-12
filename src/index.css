@@ -14,7 +14,7 @@
   --box-shadow-color: hsla(0, 0%, 0%, 0.05);
   --mobile-sidebar-bg-color: hsla(268, 63%, 95%, 0.77);
   --popup-bg-color: hsla(268, 100%, 95%, 0.42);
-  --border-color: hsl(220, 13%, 91%);
+  --border-color: hsl(0, 0%, 75%);
 }
 
 .dark {
@@ -32,7 +32,7 @@
   --box-shadow-color: hsla(0, 0%, 100%, 0.04);
   --mobile-sidebar-bg-color: hsla(268, 92%, 5%, 0.91);
   --popup-bg-color: hsla(0, 0%, 0%, 0.15);
-  --border-color: hsl(0, 0%, 100%);
+  --border-color: hsl(0, 0%, 25%);
 }
 
 
