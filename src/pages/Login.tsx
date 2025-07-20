@@ -22,6 +22,10 @@ function Login() {
   };
 
   useEffect(() => {
+    return () => setFormData({ email: "", password: "" }); // cleanup
+  }, []);
+
+  useEffect(() => {
     if (errorMsg) {
       const timeout = setTimeout(() => setErrorMsg(""), 6500);
       return () => clearTimeout(timeout);
@@ -41,7 +45,6 @@ function Login() {
         formData
       );
       if (res.data.success) {
-        
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
 
@@ -93,6 +96,7 @@ function Login() {
                 <input
                   type="email"
                   name="email"
+                  autoComplete="email"
                   required
                   className="mt-1 w-full rounded-md border px-4 py-2 bg-[#0000] text-[var(--primary-text-color)]  border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 "
                   value={formData.email}
@@ -105,6 +109,7 @@ function Login() {
                 <input
                   type="password"
                   name="password"
+                  autoComplete="current-password"
                   required
                   className="mt-1 w-full rounded-md border px-4 py-2 bg-[#0000] text-[var(--primary-text-color)]  border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   value={formData.password}
