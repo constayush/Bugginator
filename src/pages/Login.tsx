@@ -22,8 +22,8 @@ function Login() {
   };
 
   useEffect(() => {
-    return () => setFormData({ email: "", password: "" }); // cleanup
-  }, []);
+    return () => setFormData({ email: "", password: "" });
+  }, []); // Clear form data on unmoun
 
   useEffect(() => {
     if (errorMsg) {
@@ -37,32 +37,36 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       setErrorMsg("");
       const res = await axios.post(
         "http://localhost:1234/user/login",
-        formData
+        formData,
+        { withCredentials: true }
       );
-      if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
 
+      if (res.data.success) {
+        // Only store user info if needed, DON'T store any tokens here
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/dashboard");
+      } else {
+        setErrorMsg(res.data.message || "Login failed");
       }
     } catch (err) {
-      setErrorMsg("Oops! Something went wrong.");
-      console.error("Error while logging in:", err);
+      setErrorMsg(
+        err.response?.data?.message || "Invalid email or password"
+      );
+      console.error("Login Failed:", err);
     }
   };
 
   return (
     <>
-      <div className="w-full flex items-center justify-center  ">
-        <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20"></div>
-        <div className=" relative flex flex-col justify-center items-center max-w-xl w-full pt-12 px-2 z-0 ]">
+      <div className="w-full flex items-center justify-center">
+        <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20" />
+        <div className="relative flex flex-col justify-center items-center max-w-xl w-full pt-12 px-2 z-0">
           <motion.div
-            className="relative flex flex-col  rounded-xl w-full p-8 shadow-2xl bg-[var(--container-color)] border border-gray-200 dark:border-gray-700"
+            className="relative flex flex-col rounded-xl w-full p-8 shadow-2xl bg-[var(--container-color)] border border-gray-200 dark:border-gray-700"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -90,7 +94,7 @@ function Login() {
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div>
-                <label className="block text-sm font-medium ">
+                <label className="block text-sm font-medium">
                   Email address
                 </label>
                 <input
@@ -98,7 +102,7 @@ function Login() {
                   name="email"
                   autoComplete="email"
                   required
-                  className="mt-1 w-full rounded-md border px-4 py-2 bg-[#0000] text-[var(--primary-text-color)]  border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 "
+                  className="mt-1 w-full rounded-md border px-4 py-2 bg-[#0000] text-[var(--primary-text-color)] border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   value={formData.email}
                   onChange={handleChange}
                 />
@@ -111,7 +115,7 @@ function Login() {
                   name="password"
                   autoComplete="current-password"
                   required
-                  className="mt-1 w-full rounded-md border px-4 py-2 bg-[#0000] text-[var(--primary-text-color)]  border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="mt-1 w-full rounded-md border px-4 py-2 bg-[#0000] text-[var(--primary-text-color)] border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   value={formData.password}
                   onChange={handleChange}
                 />
