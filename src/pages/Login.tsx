@@ -46,7 +46,7 @@ function Login() {
       );
 
       if (res.data.success) {
-        // Only store user info if needed, DON'T store any tokens here
+        
         localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/dashboard");
       } else {
@@ -54,7 +54,7 @@ function Login() {
       }
     } catch (err) {
       setErrorMsg(
-        err.response?.data?.message || "Invalid email or password"
+        err?.response?.data?.message || "Invalid email or password"
       );
       console.error("Login Failed:", err);
     }

@@ -1,5 +1,5 @@
 import { LogOut, Mail, User, Lock, X } from "lucide-react";
-import { useAuth } from "../context/authContext";
+import useAuth  from "../context/useAuth";
 import { useNavigate, Link } from "react-router";
 import { motion } from "framer-motion";
 function Account() {

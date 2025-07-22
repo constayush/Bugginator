@@ -5,16 +5,17 @@ import {
   FolderKanban,
   Bell,
   BarChart2,
-  Users2,
+  Users2 as User_icon2,
   Bug,
-  User,
+  User as User_icon,
   ArrowLeftCircle,
   ArrowRightCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import ThemeToggle from "../ui/ThemeToggleButton";
-import useSwipe from "../hooks/useSwipe";
+import useSwipe from "../hooks/useSwipe.ts";
+
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("");
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -25,13 +26,15 @@ function Dashboard() {
     { id: "Issues", icon: Bug, label: "Issues" },
     { id: "notifications", icon: Bell, label: "Notifications" },
     { id: "analytics", icon: BarChart2, label: "Analytics" },
-    { id: "teams", icon: Users2, label: "Teams" },
+    { id: "teams", icon: User_icon2, label: "Teams" },
   ];
   useSwipe(
     () => setIsSidebarVisible(false), // swipe left to close
     () => setIsSidebarVisible(true) // swipe right to open
   );
 
+
+ 
   return (
     <div className="flex min-h-screen justify-center w-full h-full relative">
       {/* Sidebar */}
@@ -82,7 +85,7 @@ function Dashboard() {
             }
             `}
         >
-          <User className="text-purple-400" />
+          <User_icon className="text-purple-400" />
           <span className="">Account</span>
         </Link>
 

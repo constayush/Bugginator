@@ -71,76 +71,6 @@ const registerUser = async (req, res) => {
 
 }
 
-// const loginUser = async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-
-//         if (!email || !password) {
-//             return res.status(400).json({
-//                 success: false,
-//                 message: "Please provide email and password",
-//             });
-//         }
-
-//         const user = await User.findOne({ email });
-//         if (!user) {
-//             return res.status(401).json({
-//                 success: false,
-//                 message: "Invalid email",
-//             });
-//         }
-
-//         const isMatch = await bcrypt.compare(password, user.password);
-     
-    
-//         if (!isMatch) {
-//             return res.status(401).json({
-//                 success: false,
-//                 message: "Invalid password",
-//             });
-//         }
-
-//         // Generate tokens
-//         const accessToken = jwt.sign(
-//             { id: user._id, email: user.email },
-//             process.env.ACCESS_TOKEN_SECRET,
-//             { expiresIn: '15m' }
-//         );
-
-//         const refreshToken = jwt.sign(
-//             { id: user._id, email: user.email },
-//             process.env.REFRESH_TOKEN_SECRET,
-//             { expiresIn: '7d' }
-//         );
-
-//         // Send refresh token in HTTP-only cookie
-//         res.cookie('refreshToken', refreshToken, {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === 'production',
-//             sameSite: 'strict',
-//             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-//         });
-
-//         res.status(200).json({
-//             success: true,
-//             message: "Logged in successfully",
-//             accessToken,
-//             user: {
-//                 id: user._id,
-//                 name: user.name,
-//                 email: user.email,
-//             },
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({
-//             success: false,
-//             message: "Server error " + error.message,
-//         });
-//     }
-// }
-
 const loginUser = async (req, res) => {
   try {
     
@@ -158,7 +88,7 @@ const loginUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid credentials", // Prevents account enumeration
+        message: "Invalid credentials", //  account enumeration ke liye 
       });
     }
 
@@ -166,11 +96,11 @@ const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid credentials",
+        message: "Invalid credentials", //  account enumeration ke liye 
       });
     }
 
-    // Generate tokens with minimal payload
+    // Generate access and refresh tokens 
     const accessToken = jwt.sign(
       { id: user._id },
       process.env.ACCESS_TOKEN_SECRET,
@@ -183,8 +113,8 @@ const loginUser = async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    // Store hashed refresh token in DB (to support logout/revoke)
-    user.refreshToken = refreshToken; // Consider hashing if needed for higher security
+    
+    user.refreshToken = refreshToken; 
     await user.save();
 
     // Set cookies (HttpOnly, Secure, SameSite; use 'secure' in production)
