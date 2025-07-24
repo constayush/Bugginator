@@ -1,57 +1,39 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
+import { AuthContext } from "./AuthContext";
+import { AuthUser } from "../types/AuthUser";
 import axios from "axios";
-import AuthContext, { AuthContextType } from "./authContext";
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem("user");
-    return stored ? JSON.parse(stored) : null;
-  });
+interface Props {
+  children: ReactNode;
+}
 
+export const AuthProvider: React.FC<Props> = ({ children }) => {
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get("http://localhost:1234/user/profile", {
-          withCredentials: true,
-        });
-        setUser(res.data.user);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-      } catch (err) {
-        console.error("Error fetching user:", err);
-        setUser(null);
-        localStorage.removeItem("user");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get("/api/auth/me", { withCredentials: true });
+      setUser(res.data.user);
+    } catch (err) {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchUser();
   }, []);
 
-  const logout = useCallback(async () => {
-    try {
-      await axios.post("http://localhost:1234/user/logout", null, {
-        withCredentials: true,
-      });
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
+  const login = (userData: AuthUser) => setUser(userData);
+  const logout = () => {
+    axios.post("/api/auth/logout", {}, { withCredentials: true });
     setUser(null);
-    localStorage.removeItem("user");
-  }, []);
-
-  const contextValue: AuthContextType = {
-    user,
-    setUser,
-    logout,
-    loading,
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

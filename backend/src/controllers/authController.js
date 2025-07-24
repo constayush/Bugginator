@@ -4,73 +4,90 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
  
 const registerUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-    try {
-        const { name, email, password } = req.body;
-
-        if (!name || !email || !password) {
-            return res.status(400).json({
-                success: false,
-                message: "Please enter all fields!"
-            })
-        }
-
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({
-                success: false,
-                message: "User already exists!"
-            })
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = await User.create({ name, email, password: hashedPassword });
-
-        // Create Access Token (short-lived)
-        const accessToken = jwt.sign(
-            { id: newUser._id, email: newUser.email },
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "15m" }
-        );
-
-        // Create Refresh Token (long-lived)
-        const refreshToken = jwt.sign(
-            { id: newUser._id, email: newUser.email },
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: "7d" }
-        );
-
-        // Send refresh token via HTTP-only cookie
-        res.cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        });
-
-
-        res.status(201).json({
-            success: true,
-            message: "User registered successfully!",
-            accessToken,
-            user: {
-                id: newUser._id,
-                name: newUser.name,
-                email: newUser.email,
-            },
-        })
-    }
-    catch (err) {
-        console.error(err);
-        res.status(500).json({
-            success: false,
-            message: "server error " + err.message,
-        })
+    // ⚠️ Basic validation
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Please enter all required fields",
+      });
     }
 
-}
+    // 🧠 Normalize email
+    const normalizedEmail = email.trim().toLowerCase();
 
+    // 🛑 Check if user exists
+    const existingUser = await User.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists",
+      });
+    }
+
+    // 🔐 Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 🆕 Create the user
+    const newUser = await User.create({
+      name,
+      email: normalizedEmail,
+      password: hashedPassword,
+    });
+
+    // 🔏 Generate JWT tokens
+    const accessToken = jwt.sign(
+      { id: newUser._id },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "15m" }
+    );
+
+    const refreshToken = jwt.sign(
+      { id: newUser._id },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    // 💾 Optionally store refreshToken in DB (for logout/revoke support)
+    newUser.refreshToken = refreshToken;
+    await newUser.save();
+
+    // 🍪 Set HttpOnly tokens via cookies
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    // ✅ Return user info (excluding sensitive fields)
+    res.status(201).json({
+      success: true,
+      message: "User registered and logged in successfully",
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+      },
+    });
+
+  } catch (err) {
+    console.error("Registration error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Server error: " + err.message,
+    });
+  }
+};
 const loginUser = async (req, res) => {
   try {
     
