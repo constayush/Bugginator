@@ -10,10 +10,10 @@ import Issues from "./dashboard_tabs/Issues";
 import Teams from "./dashboard_tabs/Teams";
 import Analytics from "./dashboard_tabs/Analytics";
 import Notifications from "./dashboard_tabs/Notifications";
-
 import Index from "./dashboard_tabs/Index";
 import Account from "./dashboard_tabs/Accounts";
-import PrivateRoute from "./utils/PrivateRoute";
+import ProtectedRoute from "./utils/ProtectedRoute";
+
 function App() {
   return (
     <BrowserRouter>
@@ -45,12 +45,14 @@ function App() {
             </>
           }
         />
+
+
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Dashboard />
-            </PrivateRoute>
+            </ProtectedRoute>
           }
         >
           <Route index element={<Index />} />
@@ -60,15 +62,10 @@ function App() {
           <Route path="issues" element={<Issues />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="notifications" element={<Notifications />} />
+          <Route path="accounts" element={<Account />} />
         </Route>
-        <Route
-          path="/account"
-          element={
-            <PrivateRoute>
-              <Account />
-            </PrivateRoute>
-          }
-        />
+
+
       </Routes>
     </BrowserRouter>
   );

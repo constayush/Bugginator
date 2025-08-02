@@ -230,7 +230,7 @@ function Teams() {
               <div
                 key={team.id}
                 onClick={() => handleTeamClick(team.id)}
-                className={`aspect-square flex box-shadow-card  justify-center items-center cursor-pointer  hover:bg-purple-500/10 bg-[var(--dash-card-bg-color)] p-4 rounded-xl border transition
+                className={`aspect-square flex box-shadow-card  justify-center items-center cursor-pointer dark:hover:bg-purple-500/70   hover:bg-purple-500/10 bg-[var(--dash-card-bg-color)] p-4 rounded-xl border transition
                   ${
                     isActive
                       ? "border-purple-600 ring-2 ring-purple-400 shadow-lg border-3 bg-purple-500/10"

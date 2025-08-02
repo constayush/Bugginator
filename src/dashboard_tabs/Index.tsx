@@ -5,6 +5,7 @@ import {
   PlusCircle,
   UserPlus2,
 } from "lucide-react";
+import { useAuth } from "../context/useAuth";
 function Index() {
       const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -18,22 +19,26 @@ function Index() {
       },
     },
   };
+    
+const {user} = useAuth();
+
+const userName = user?.name;
   return (
   <div className="flex-1 p-3 md:p-6 h-full  relative overflow-y-auto">
       
         <motion.div
-          className="relative flex flex-col mt-[3.5rem] md:mt-0 gap-6 w-full max-w-6xl mx-auto p-3 md:p-8 rounded-xl shadow-2xl bg-[var(--container-color)] border border-[var(--border-color)] z-10"
+          className="relative flex flex-col mt-[3.5rem] md:mt-0 gap-6 w-full max-w-6xl mx-auto p-3 md:p-8 rounded-xl shadow-2xl bg-[#ecc7f71d] border border-[var(--border-color)] z-10"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
           <h1 className="text-2xl md:text-4xl  text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-            Good to see you, Ayush! ✨
+            Good to see you, {userName}! ✨
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Tasks Card */}
-            <div className="w-full bg-[var(--dash-card-bg-color)] hover:bg-purple-500/10 transition cursor-pointer p-4 rounded-lg flex items-center gap-4 shadow-inner border border-[var(--border-color)]">
+            <div className="w-full bg-[var(--dash-card-bg-color)] dark:hover:bg-purple-500/70  hover:bg-purple-500/10 transition cursor-pointer p-4 rounded-lg flex items-center gap-4 shadow-inner border border-[var(--border-color)]">
               <ClipboardCheck className="text-purple-500" />
               <div>
                 <h2 className="text-lg font-semibold">Tasks Assigned To You</h2>
@@ -42,7 +47,7 @@ function Index() {
             </div>
 
             {/* Projects Card */}
-            <div className="w-full bg-[var(--dash-card-bg-color)] hover:bg-purple-500/10 transition cursor-pointer p-4 rounded-lg flex items-center gap-4 shadow-inner border border-[var(--border-color)]">
+            <div className="w-full bg-[var(--dash-card-bg-color)] dark:hover:bg-purple-500/70   hover:bg-purple-500/10 transition cursor-pointer p-4 rounded-lg flex items-center gap-4 shadow-inner border border-[var(--border-color)]">
               <FolderKanban className="text-blue-500" />
               <div>
                 <h2 className="text-lg font-semibold">Your Projects</h2>

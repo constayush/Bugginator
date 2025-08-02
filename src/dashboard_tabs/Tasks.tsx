@@ -41,7 +41,7 @@ export default function Tasks() {
         {dummyTasks.map((task) => (
           <div
             key={task.id}
-            className="bg-[var(--dash-card-bg-color)] box-shadow-card p-4 rounded-lg border border-gray-300 dark:border-gray-700 shadow flex flex-col gap-3 hover:bg-purple-500/10 transition"
+            className="bg-[var(--dash-card-bg-color)] box-shadow-card p-4 rounded-lg border border-gray-300 dark:border-gray-700 shadow flex flex-col gap-3 dark:hover:bg-purple-500/70  hover:bg-purple-500/10 transition"
           >
             <div className="flex items-center justify-between">
               <h3 className="font-semibold text-2xl">{task.title}</h3>

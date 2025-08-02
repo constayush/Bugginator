@@ -1,13 +1,17 @@
 "use client";
+
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../context/useAuth"; // ✅ adjust path as needed
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth(); // ✅ grab login from AuthContext
+
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -23,7 +27,7 @@ function Login() {
 
   useEffect(() => {
     return () => setFormData({ email: "", password: "" });
-  }, []); // Clear form data on unmoun
+  }, []);
 
   useEffect(() => {
     if (errorMsg) {
@@ -39,24 +43,24 @@ function Login() {
     e.preventDefault();
     try {
       setErrorMsg("");
+
       const res = await axios.post(
-        "http://localhost:1234/user/login",
+        "http://localhost:1234/auth/login",
         formData,
         { withCredentials: true }
       );
 
-      if (res.data.success) {
-        
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+      if (res.data.success && res.data.user) {
+        login(res.data.user); // ✅ updates global auth state
         navigate("/dashboard");
       } else {
         setErrorMsg(res.data.message || "Login failed");
       }
-    } catch (err) {
+    } catch {
       setErrorMsg(
-        err?.response?.data?.message || "Invalid email or password"
+          "Invalid email or password"
       );
-      console.error("Login Failed:", err);
+      console.error("Login Failed: 11");
     }
   };
 
@@ -71,7 +75,7 @@ function Login() {
             animate="visible"
             variants={containerVariants}
           >
-            {errorMsg ? (
+            {errorMsg && (
               <motion.div
                 initial={{ opacity: 1, y: -20 }}
                 animate={{ opacity: 0, y: 0 }}
@@ -86,7 +90,7 @@ function Login() {
               >
                 {errorMsg}
               </motion.div>
-            ) : null}
+            )}
 
             <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
               Log in to Bugginator
@@ -94,9 +98,7 @@ function Login() {
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div>
-                <label className="block text-sm font-medium">
-                  Email address
-                </label>
+                <label className="block text-sm font-medium">Email address</label>
                 <input
                   type="email"
                   name="email"

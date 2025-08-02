@@ -7,7 +7,6 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // ⚠️ Basic validation
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
@@ -15,10 +14,10 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // 🧠 Normalize email
+
     const normalizedEmail = email.trim().toLowerCase();
 
-    // 🛑 Check if user exists
+   
     const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({
@@ -27,17 +26,17 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // 🔐 Hash password
+   
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 🆕 Create the user
+    
     const newUser = await User.create({
       name,
       email: normalizedEmail,
       password: hashedPassword,
     });
 
-    // 🔏 Generate JWT tokens
+    
     const accessToken = jwt.sign(
       { id: newUser._id },
       process.env.ACCESS_TOKEN_SECRET,
@@ -50,11 +49,11 @@ const registerUser = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    // 💾 Optionally store refreshToken in DB (for logout/revoke support)
+    
     newUser.refreshToken = refreshToken;
     await newUser.save();
 
-    // 🍪 Set HttpOnly tokens via cookies
+
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -69,7 +68,7 @@ const registerUser = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    // ✅ Return user info (excluding sensitive fields)
+    
     res.status(201).json({
       success: true,
       message: "User registered and logged in successfully",
@@ -90,7 +89,7 @@ const registerUser = async (req, res) => {
 };
 const loginUser = async (req, res) => {
   try {
-    
+     console.log(req.body);
     const email = req.body.email?.trim().toLowerCase();
     const password = req.body.password;
 
@@ -166,10 +165,68 @@ const loginUser = async (req, res) => {
     });
   }
 };
-const allUsers = () => {
+const logoutUser = async (req, res) => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      return res.status(200).json({ success: true, message: "Already logged out" });
+    }
+
+    // Optional: remove refresh token from DB
+    const user = await User.findOne({ refreshToken });
+    if (user) {
+      user.refreshToken = null;
+      await user.save({ validateBeforeSave: false });
+    }
+
+    // Clear cookies
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+    });
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+
+  } catch (error) {
+    console.error("Logout error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Logout failed. Please try again.",
+    });
+  }
+};
+const getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password -refreshToken");
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    console.error("GetMe error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
 
 
-
-}
-
-export { registerUser, loginUser, allUsers };
+export { registerUser, loginUser, logoutUser, getCurrentUser };

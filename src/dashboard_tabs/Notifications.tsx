@@ -37,7 +37,7 @@ function Notifications() {
           {notifications.map((note) => (
             <div
               key={note.id}
-              className="flex items-start shadow-md gap-4 p-4 rounded-md border border-gray-700 bg-[var(--dash-card-bg-color)] hover:bg-purple-500/10 transition"
+              className="flex items-start shadow-md gap-4 p-4 rounded-md border border-gray-700 bg-[var(--dash-card-bg-color)] dark:hover:bg-purple-500/70  hover:bg-purple-500/10 transition"
             >
               <note.icon size={28} className="text-purple-400 mt-1" />
               <div>

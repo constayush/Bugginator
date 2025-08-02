@@ -27,6 +27,7 @@ function Dashboard() {
     { id: "notifications", icon: Bell, label: "Notifications" },
     { id: "analytics", icon: BarChart2, label: "Analytics" },
     { id: "teams", icon: User_icon2, label: "Teams" },
+    { id: "accounts", icon: User_icon, label: "Accounts" },
   ];
   useSwipe(
     () => setIsSidebarVisible(false), // swipe left to close
@@ -73,7 +74,7 @@ function Dashboard() {
             <span className=" inline">{item.label}</span>
           </Link>
         ))}
-        <Link
+        {/* <Link
           to="/account"
           className={`flex items-center gap-3 text-sm md:text-base text-left px-3 py-2 
             rounded-md hover:bg-purple-500/10 transition
@@ -87,7 +88,7 @@ function Dashboard() {
         >
           <User_icon className="text-purple-400" />
           <span className="">Account</span>
-        </Link>
+        </Link> */}
 
         <ThemeToggle />
       </aside>

@@ -1,12 +1,12 @@
 import express from 'express';
-import { registerUser, loginUser, allUsers } from '../controllers/authController.js';
-
+import { registerUser, loginUser, getCurrentUser, logoutUser } from '../controllers/authController.js';
+import { authenticateUser } from '../middlewares/authenticateUser.js';
 
 const router = express.Router();
 
 router.route('/register').post(registerUser);
 router.post('/login', loginUser);
-router.get('/all', allUsers);
-router.get('/me', (req, res) => res.json({name: "ayush"}) );
+router.post('/logout', logoutUser);
+router.get('/me' ,authenticateUser, getCurrentUser );
 
 export default router;

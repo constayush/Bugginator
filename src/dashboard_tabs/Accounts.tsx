@@ -1,14 +1,17 @@
-import { LogOut, Mail, User, Lock, X } from "lucide-react";
-import useAuth  from "../context/useAuth";
-import { useNavigate, Link } from "react-router";
+import { LogOut, Mail, User, Lock, Clock, UserCheck } from "lucide-react";
+import { useAuth } from "../context/useAuth";
 import { motion } from "framer-motion";
+
 function Account() {
   const { logout, user } = useAuth();
-  const navigate = useNavigate();
+
+  const userName = user?.name;
+  const userEmail = user?.email;
+  const userCreatedAt = new Date(user?.createdAt).toLocaleDateString() || "N/A";
+  const userIsVerified = user?.isVerified ? "Verified" : "Not Verified";
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
   };
 
   const handlePasswordReset = () => {
@@ -17,64 +20,62 @@ function Account() {
 
   return (
     <motion.div
-    initial={{ opacity: 0, y: 50, overflowY: "hidden" }}
-      animate={{ opacity: 1, y: 0, overflowY: "auto" }}
+      initial={{ y: 50 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-    className="flex justify-center items-center min-h-screen bg-[var(--background-color)] px-4 relative">
-      <div
-      
-      className="w-full md:max-w-2xl py-40 md:py-10 bg-[var(--container-color)] text-[var(--primary-text-color)] backdrop-blur-xl shadow-xl border border-[var(--border-color)] rounded-2xl p-8 space-y-6 transition-all">
-        <Link
-          to="/dashboard"
-          className="absolute top-6 right-6 p-2 rounded-full hover:bg-[var(--container-color)] border shadow-2xl  border-[#929292] transition z-99 text-red-500 hover:text-[var(--primary-color)]"
-          title="Back to Dashboard"
-        >
-          <X size={20} />
-        </Link>
-        <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] right-0 bg-gradient-to-r from-[#ff8080]/20 via-[#7dfce7]/20 to-[#b282ff]/20"></div>
-        <div className="absolute w-[40%] blur-[100px] overflow-hidden h-[40%] bg-gradient-to-r from-[#7dfce7]/20 via-[#ff8080]/20 to-[#b282ff]/20"></div>
+      className="flex justify-center items-center bg-[var(--background-color)] relative mt-30 md:mt-0"
+    >
+   
+      <motion.div initial={{opacity:0, y:100}}  animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="absolute w-96 h-96 bg-gradient-to-r from-pink-400/10 via-cyan-300/10 to-purple-400/10 blur-[120px] rounded-full -top-10 -right-10 z-0"></motion.div>
+      <motion.div initial={{opacity:0, y:100}}  animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="absolute w-96 h-96 bg-gradient-to-r from-purple-400/10 via-pink-300/10 to-cyan-400/10 blur-[120px] rounded-full -bottom-10 -left-10 z-0"></motion.div>
+
+      <div className="relative z-10 w-full max-w-2xl bg-[var(--container-color)] rounded-3xl shadow-xl border border-[var(--border-color)] backdrop-blur-2xl p-8 space-y-8">
+     
         {/* Header */}
-       
         <div className="text-center">
-          <h1 className="text-3xl font-semibold">Account</h1>
-          <p className="text-sm text-[var(--secondary-text-color)] mt-1">
-            Manage your profile
-          </p>
+          <h1 className="text-4xl font-bold">👤 Your Account</h1>
         </div>
 
         {/* User Info */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <User size={22} className="text-[var(--icon-muted)]" />
-            <div>
-              <p className="font-medium text-xl">{user?.name || "User Name"}</p>
+        <div className="space-y-5">
+          {[
+            { icon: <User className="text-[var(--primary-text-color)]"/>, label: "Name", value: userName || "User" },
+            { icon: <Mail className="text-[var(--primary-text-color)]"/>, label: "Email", value: userEmail || "Email" },
+            { icon: <Clock className="text-[var(--primary-text-color)]"/>, label: "Joined On", value: userCreatedAt },
+            { icon: <UserCheck className="text-[var(--primary-text-color)]"/>, label: "Verification", value: userIsVerified },
+          ].map((info, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-4 p-4 rounded-xl bg-[var(--dash-card-bg-color)] border border-[var(--border-color)] hover:shadow-md transition"
+            >
+              <div className="bg-[var(--icon-muted)] p-2 rounded-full text-white">
+                {info.icon}
+              </div>
+              <div>
+                <p className="text-sm text-[var(--secondary-text-color)]">{info.label}</p>
+                <p className="text-xl font-semibold text-[var(--primary-text-color)]">{info.value}</p>
+              </div>
             </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Mail size={22} className="text-[var(--icon-muted)]" />
-            <div>
-              <p className="font-medium text-xl">{user?.email || "Email"}</p>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Actions */}
-        <div className="space-y-3 pt-6">
+        <div className="flex flex-col md:flex-row gap-4 pt-4">
           <button
             onClick={handlePasswordReset}
-            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-md bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:opacity-90 transition"
+            className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500 text-white font-semibold transition hover:brightness-110 shadow-md"
           >
             <Lock size={18} /> Reset Password
           </button>
 
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-md border border-red-400 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition"
+            className="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg border border-red-400 text-red-500 hover:bg-red-500/40 transition shadow-sm"
           >
             <LogOut size={18} /> Logout
           </button>
         </div>
+
       </div>
     </motion.div>
   );

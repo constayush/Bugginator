@@ -6,7 +6,7 @@ import { useState } from "react";
 import SignupButton from "../ui/SignupButton";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import useAuth  from "../context/useAuth"; 
+import { useAuth } from "../context/useAuth"; // ✅ adjust path as needed
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ function Signup() {
 
   const [backendResponse, setBackendResponse] = useState<"success" | "error" | "">("");
   const navigate = useNavigate();
-  const { setUser } = useAuth(); // ✅ update AuthContext after registration
+  const { login } = useAuth(); // ✅ grab login method from context
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -40,18 +40,17 @@ function Signup() {
 
     try {
       const res = await axios.post(
-        "http://localhost:1234/user/register",
+        "http://localhost:1234/auth/register",
         formData,
         { withCredentials: true } // ✅ cookie support
       );
 
-      if (res.data.success) {
-        setUser(res.data.user); // ✅ Save user in AuthContext
+      if (res.data.success && res.data.user) {
+        login(res.data.user); // ✅ update context with user info
         setBackendResponse("success");
 
-        // ⏳ optionally delay
         setTimeout(() => {
-          navigate("/dashboard"); // ✅ Auto redirect if logged in
+          navigate("/dashboard");
         }, 1200);
       } else {
         setBackendResponse("error");
