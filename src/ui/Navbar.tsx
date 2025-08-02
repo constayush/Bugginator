@@ -25,9 +25,9 @@ function Navbar() {
           <a href='/'><h1 className="logo font-bold text-lg tracking-wider">BUGGINATOR</h1></a>
   
           <ul className="hidden md:flex gap-4">
-            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-300 " to="/login">Login</Link>
-            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-300 " to="/signup">Sign Up</Link>
-            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 transition duration-300 " to="/">Features</Link>
+            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 " to="/login">Login</Link>
+            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 " to="/signup">Sign Up</Link>
+            <Link className="hover:border-b-2   border-b-2 border-[#ddd0] hover:border-purple-500 " to="/">Features</Link>
           </ul>
   
           <ul className="cta hidden md:flex gap-4 items-center">

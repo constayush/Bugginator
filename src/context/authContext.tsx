@@ -4,7 +4,10 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  // add more as needed
+  role: string;
+  isVerified: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type AuthContextType = {

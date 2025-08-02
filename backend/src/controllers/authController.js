@@ -89,9 +89,9 @@ const registerUser = async (req, res) => {
 };
 const loginUser = async (req, res) => {
   try {
-     console.log(req.body);
-    const email = req.body.email?.trim().toLowerCase();
-    const password = req.body.password;
+     
+    const email = req.body?.email?.trim().toLowerCase();
+    const password = req.body?.password;
 
     if (!email || !password) {
       return res.status(400).json({

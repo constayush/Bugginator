@@ -7,7 +7,10 @@ function Account() {
 
   const userName = user?.name;
   const userEmail = user?.email;
-  const userCreatedAt = new Date(user?.createdAt).toLocaleDateString() || "N/A";
+  const userCreatedAt = user?.createdAt
+    ? new Date(user.createdAt).toLocaleDateString()
+    : "N/A";
+
   const userIsVerified = user?.isVerified ? "Verified" : "Not Verified";
 
   const handleLogout = () => {
@@ -25,12 +28,20 @@ function Account() {
       transition={{ duration: 0.5 }}
       className="flex justify-center items-center bg-[var(--background-color)] relative mt-30 md:mt-0"
     >
-   
-      <motion.div initial={{opacity:0, y:100}}  animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="absolute w-96 h-96 bg-gradient-to-r from-pink-400/10 via-cyan-300/10 to-purple-400/10 blur-[120px] rounded-full -top-10 -right-10 z-0"></motion.div>
-      <motion.div initial={{opacity:0, y:100}}  animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="absolute w-96 h-96 bg-gradient-to-r from-purple-400/10 via-pink-300/10 to-cyan-400/10 blur-[120px] rounded-full -bottom-10 -left-10 z-0"></motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9 }}
+        className="absolute w-96 h-96 bg-gradient-to-r from-pink-400/10 via-cyan-300/10 to-purple-400/10 blur-[120px] rounded-full -top-10 -right-10 z-0"
+      ></motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9 }}
+        className="absolute w-96 h-96 bg-gradient-to-r from-purple-400/10 via-pink-300/10 to-cyan-400/10 blur-[120px] rounded-full -bottom-10 -left-10 z-0"
+      ></motion.div>
 
       <div className="relative z-10 w-full max-w-2xl bg-[var(--container-color)] rounded-3xl shadow-xl border border-[var(--border-color)] backdrop-blur-2xl p-8 space-y-8">
-     
         {/* Header */}
         <div className="text-center">
           <h1 className="text-4xl font-bold">👤 Your Account</h1>
@@ -39,10 +50,26 @@ function Account() {
         {/* User Info */}
         <div className="space-y-5">
           {[
-            { icon: <User className="text-[var(--primary-text-color)]"/>, label: "Name", value: userName || "User" },
-            { icon: <Mail className="text-[var(--primary-text-color)]"/>, label: "Email", value: userEmail || "Email" },
-            { icon: <Clock className="text-[var(--primary-text-color)]"/>, label: "Joined On", value: userCreatedAt },
-            { icon: <UserCheck className="text-[var(--primary-text-color)]"/>, label: "Verification", value: userIsVerified },
+            {
+              icon: <User className="text-[var(--primary-text-color)]" />,
+              label: "Name",
+              value: userName || "User",
+            },
+            {
+              icon: <Mail className="text-[var(--primary-text-color)]" />,
+              label: "Email",
+              value: userEmail || "Email",
+            },
+            {
+              icon: <Clock className="text-[var(--primary-text-color)]" />,
+              label: "Joined On",
+              value: userCreatedAt,
+            },
+            {
+              icon: <UserCheck className="text-[var(--primary-text-color)]" />,
+              label: "Verification",
+              value: userIsVerified,
+            },
           ].map((info, i) => (
             <div
               key={i}
@@ -52,8 +79,12 @@ function Account() {
                 {info.icon}
               </div>
               <div>
-                <p className="text-sm text-[var(--secondary-text-color)]">{info.label}</p>
-                <p className="text-xl font-semibold text-[var(--primary-text-color)]">{info.value}</p>
+                <p className="text-sm text-[var(--secondary-text-color)]">
+                  {info.label}
+                </p>
+                <p className="text-xl font-semibold text-[var(--primary-text-color)]">
+                  {info.value}
+                </p>
               </div>
             </div>
           ))}
@@ -75,7 +106,6 @@ function Account() {
             <LogOut size={18} /> Logout
           </button>
         </div>
-
       </div>
     </motion.div>
   );
