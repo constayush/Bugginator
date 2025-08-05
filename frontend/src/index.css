@@ -124,15 +124,15 @@ body,html{
   cursor: pointer;
  }
 
- .scrolled-nav{
-background: var(--navbar-bg-color);
-backdrop-filter: blur(20px);
-box-shadow:  0 4px 30px rgba(0, 0, 0, 0.2);
-padding: 1rem;
-border-radius: 8px;
-border-bottom: 1px solid #ffffff60;
- width: 50rem;
- }
+ /* Tailwind overrides if you want more effect on scroll */
+.scrolled-nav {
+
+  /* padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease-in-out; */
+}
+
 
  .box-shadow-card{
 

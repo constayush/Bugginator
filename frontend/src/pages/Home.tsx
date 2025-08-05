@@ -240,7 +240,7 @@ function Home() {
               </motion.p>
             </motion.div>
 
-            <motion.div className="mt-10 flex flex-wrap gap-4 " variants={buttonContainerVariants}>
+            <motion.div className="mt-10 flex flex-wrap gap-4  md:w-fit w-full justify-center items-center" variants={buttonContainerVariants}>
               <motion.div variants={buttonVariants} whileHover="hover">
                 <SignupButton />
               </motion.div>
