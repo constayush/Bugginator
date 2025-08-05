@@ -3,7 +3,7 @@
   --bg-color: hsl(289, 65%, 98%);
   --primary-text-color: hsl(0, 0%, 0%);
   --secondary-text-color: hsl(0, 0%, 10%);
-  --navbar-bg-color: hsl(0, 0%, 96%);
+  --navbar-bg-color: hsla(305, 27%, 90%, 0.702);
   --container-color: hsla(274, 100%, 48%, 0.04);
   --gradient-start: hsl(271, 81%, 56%);
   --gradient-end: hsl(217, 91%, 60%);
@@ -21,7 +21,7 @@
   --bg-color: hsl(0, 0%, 13%);
   --primary-text-color: hsl(0, 0%, 100%);
   --secondary-text-color: hsl(0, 0%, 77%);
-  --navbar-bg-color: hsla(0, 0%, 22%, 0.57);
+  --navbar-bg-color: hsla(0, 0%, 0%, 0.209);
   --container-color: hsla(274, 100%, 48%, 0.02);
   --gradient-start: hsl(271, 81%, 56%);
   --gradient-end: hsl(217, 91%, 60%);
@@ -33,6 +33,7 @@
   --mobile-sidebar-bg-color: hsla(268, 92%, 5%, 0.91);
   --popup-bg-color: hsla(0, 0%, 0%, 0.15);
   --border-color: hsl(0, 0%, 20%);
+  
 }
 
 
