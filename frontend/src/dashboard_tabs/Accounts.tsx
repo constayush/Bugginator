@@ -1,9 +1,10 @@
 import { LogOut, Mail, User, Lock, Clock, UserCheck } from "lucide-react";
-import { useAuth } from "../context/useAuth";
+import { useAuthStore } from '../store/useAuthStore';
 import { motion } from "framer-motion";
 
 function Account() {
-  const { logout, user } = useAuth();
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
   const userName = user?.name;
   const userEmail = user?.email;

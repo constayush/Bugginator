@@ -5,10 +5,20 @@ import {
   PlusCircle,
   UserPlus2,
 } from "lucide-react";
-import { useAuth } from "../context/useAuth";
+import { useAuthStore } from '../store/useAuthStore';
 function Index() {
-      const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
+      
+    
+const user = useAuthStore((state) => state.user);
+  return (
+  <div className="flex-1 p-3 md:p-6 h-full  relative overflow-y-auto">
+      
+        <motion.div
+          className="relative flex flex-col mt-[3.5rem] md:mt-0 gap-6 w-full max-w-6xl mx-auto p-3 md:p-8 rounded-xl shadow-2xl bg-[#ecc7f71d] border border-[var(--border-color)] z-10"
+          initial="hidden"
+          animate="visible"
+          variants={{
+               hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -18,22 +28,10 @@ function Index() {
         damping: 15,
       },
     },
-  };
-    
-const {user} = useAuth();
-
-const userName = user?.name;
-  return (
-  <div className="flex-1 p-3 md:p-6 h-full  relative overflow-y-auto">
-      
-        <motion.div
-          className="relative flex flex-col mt-[3.5rem] md:mt-0 gap-6 w-full max-w-6xl mx-auto p-3 md:p-8 rounded-xl shadow-2xl bg-[#ecc7f71d] border border-[var(--border-color)] z-10"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
+          }}
         >
           <h1 className="text-2xl md:text-4xl  text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
-            Good to see you, {userName}! ✨
+            Good to see you, {user?.name}! ✨
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

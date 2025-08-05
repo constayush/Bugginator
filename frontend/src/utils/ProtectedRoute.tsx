@@ -1,9 +1,9 @@
 import { Navigate } from "react-router";
-import {useAuth} from "../context/useAuth";
+import { useAuthStore } from '../store/useAuthStore';
 import { useLocation } from "react-router";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { user } = useAuth();
+  const user = useAuthStore((state) => state.user);
   const location = useLocation();
 
   if (!user) {

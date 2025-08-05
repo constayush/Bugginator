@@ -28,8 +28,8 @@ function Navbar() {
     <>
       {/* Adaptive Navbar - Static initially, fixed on scroll */}
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: -100, opacity: 0 , filter: "blur(100px)" }}
+        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className={`z-50 w-full transition-all duration-700 ease-out ${scrolled ? "fixed top-0" : "static"}`}
       >

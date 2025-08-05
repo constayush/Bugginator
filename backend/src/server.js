@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 
 dotenv.config(); // Load env variables
 
+
 const app = express();
 app.use(cookieParser());
 // ✅ Connect to MongoDB

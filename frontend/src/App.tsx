@@ -13,10 +13,12 @@ import Notifications from "./dashboard_tabs/Notifications";
 import Index from "./dashboard_tabs/Index";
 import Account from "./dashboard_tabs/Accounts";
 import ProtectedRoute from "./utils/ProtectedRoute";
-
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
+    
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route
           path="/"
