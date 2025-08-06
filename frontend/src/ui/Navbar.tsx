@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
 import { useEffect, useState } from "react"
 import { Link } from "react-router"
 import ThemeToggle from "./ThemeToggleButton"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X } from 'lucide-react'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,22 +18,28 @@ function Navbar() {
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
-  const menuItems = [
-    { path: "/", label: "Features" },
-    { path: "/login", label: "Login" },
-    { path: "/signup", label: "Signup" },
+  const centerMenuItems = [
+    { path: "#features", label: "Features" },
+    { path: "#pricing", label: "Pricing" },
+     {  path: "#faq",label: "FAQ" },
   ]
+
+  const authButtons = [
+    { path: "/login", label: "Login", variant: "ghost" },
+    { path: "/signup", label: "Sign Up", variant: "primary" },
+  ]
+
 
   return (
     <>
       {/* Adaptive Navbar - Static initially, fixed on scroll */}
       <motion.nav
-        initial={{ y: -100, opacity: 0 , filter: "blur(100px)" }}
-        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+        initial={{ y: -100, opacity: 0,  }}
+        animate={{ y: 0, opacity: 1, }}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`z-50 w-full transition-all duration-700 ease-out ${scrolled ? "fixed top-0" : "static"}`}
+        className={`z-50 w-full transition-all duration-700 ease-out  ${scrolled ? "fixed top-0" : "static"}`}
       >
-        <div className="max-w-[73rem] mx-auto">
+        <div className="max-w-[84rem] mx-auto  ">
           <motion.div
             animate={{
               marginTop: scrolled ? "1.5rem" : "0rem",
@@ -45,7 +51,7 @@ function Navbar() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
             className={`backdrop-blur-xl transition-all duration-700 ease-out ${
               scrolled
-                ? "bg-[var(--navbar-bg-color)] rounded-full px-8 py-4 shadow-lg shadow-black/10 dark:shadow-white/5"
+                ? "bg-[var(--navbar-bg-color)] backdrop-blur-2xl rounded-full px-8 py-4 shadow-lg shadow-black/10 dark:shadow-white/5"
                 : "bg-transparent px-6 py-6 md:px-8 md:py-8"
             }`}
             style={{
@@ -60,49 +66,92 @@ function Navbar() {
                 href="/"
                 whileHover={{ scale: 1.05 }}
                 animate={{
-                  fontSize: scrolled ? "1.125rem" : "1.275rem", // text-lg vs text-2xl/3xl
+                  fontSize: scrolled ? "1.125rem" : "1.275rem",
                 }}
                 transition={{
                   duration: 0.7,
-                  ease: [0.25, 0.1, 0.25, 1], // Smooth cubic-bezier, no spring
+                  ease: [0.25, 0.1, 0.25, 1],
                 }}
-                className="font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent hidden md:block"
+                className="font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent"
               >
                 BUGGINATOR
               </motion.a>
 
               {/* Desktop Menu */}
-              <div className="hidden md:flex items-center gap-6">
-                {menuItems.map((item, i) => (
+              <div className="hidden md:flex items-center justify-between flex-1">
+                {/* Center Navigation */}
+                <div className="flex items-center gap-8 mx-auto">
+                  {centerMenuItems.map((item, i) => (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, filter: "blur(4px)" }}
+                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      transition={{
+                        delay: i * 0.1 + 0.3,
+                        duration: 0.6,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                    >
+                      <a
+                        href={item.path}
+                        className="font-medium text-sm text-[var(--primary-text-color)] transition-all duration-300 ease-out hover:scale-105 hover:text-[var(--gradient-start)] relative group"
+                      >
+                        {item.label}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] transition-all duration-300 group-hover:w-full"></span>
+                      </a>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Right Side - Auth Buttons & Theme Toggle */}
+                <div className="flex items-center gap-4">
+                  {authButtons.map((item, i) => (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, filter: "blur(4px)" }}
+                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      transition={{
+                        delay: (i + centerMenuItems.length) * 0.1 + 0.3,
+                        duration: 0.6,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                    >
+                      {item.variant === "primary" ? (
+                        <Link
+                          to={item.path}
+                          className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-lg transition-all duration-200 hover:opacity-90 hover:scale-105 shadow-sm"
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <Link
+                          to={item.path}
+                          className="inline-flex border ml-4 items-center justify-center px-4 py-2 text-sm font-medium text-[var(--primary-text-color)] transition-all duration-200 hover:bg-[var(--container-color)] rounded-lg hover:scale-105"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </motion.div>
+                  ))}
+                  
                   <motion.div
-                    key={item.path}
                     initial={{ opacity: 0, filter: "blur(4px)" }}
                     animate={{ opacity: 1, filter: "blur(0px)" }}
                     transition={{
-                      delay: i * 0.1 + 0.3,
+                      delay: (authButtons.length + centerMenuItems.length) * 0.1 + 0.3,
                       duration: 0.6,
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
                   >
-                    <Link
-                      to={item.path}
-                      className={`font-medium text-sm transition-all duration-300 ease-out hover:scale-105`}
-                    >
-                      {item.label}
-                    </Link>
+                    <ThemeToggle />
                   </motion.div>
-                ))}
-                <ThemeToggle />
+                </div>
               </div>
 
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMenu}
-                className={`md:hidden w-8 h-8 flex items-center justify-center transition-colors duration-300 ${
-                  scrolled
-                    ? "text-gray-700 dark:text-white/80 hover:text-gray-900 dark:hover:text-white"
-                    : "text-white/80 hover:text-white"
-                }`}
+                className={`md:hidden w-8 h-8 flex items-center justify-center transition-colors duration-300 text-[var(--primary-text-color)] hover:text-[var(--gradient-start)]`}
               >
                 <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.3, ease: "easeOut" }}>
                   {isOpen ? <X size={18} /> : <Menu size={18} />}
@@ -113,7 +162,7 @@ function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Liquidy Mobile Drawer */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -126,7 +175,7 @@ function Navbar() {
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
               onClick={toggleMenu}
             />
-
+            
             {/* Drawer */}
             <motion.div
               initial={{ x: "100%" }}
@@ -134,7 +183,7 @@ function Navbar() {
               exit={{ x: "100%" }}
               transition={{
                 duration: 0.5,
-                ease: [0.25, 0.1, 0.25, 1], // Smooth cubic-bezier
+                ease: [0.25, 0.1, 0.25, 1],
               }}
               className="fixed top-0 right-0 h-full w-72 bg-[var(--navbar-bg-color)] backdrop-blur-2xl z-50 md:hidden"
               style={{
@@ -148,16 +197,16 @@ function Navbar() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2, duration: 0.4 }}
-                    className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+                    className="text-2xl font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent"
                   >
                     Bugginator
                   </motion.span>
-                
                 </div>
 
                 {/* Menu Items */}
                 <div className="space-y-6">
-                  {menuItems.map((item, i) => (
+                  {/* Navigation Links */}
+                  {centerMenuItems.map((item, i) => (
                     <motion.div
                       key={item.path}
                       initial={{
@@ -181,15 +230,62 @@ function Navbar() {
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
                     >
-                      <Link
-                        to={item.path}
+                      <a
+                        href={item.path}
                         onClick={toggleMenu}
-                        className="block text-xl  font-light transition-all duration-300 ease-out hover:translate-x-2"
+                        className="block text-xl font-light text-[var(--primary-text-color)] transition-all duration-300 ease-out hover:translate-x-2 hover:text-[var(--gradient-start)]"
                       >
                         {item.label}
-                      </Link>
+                      </a>
                     </motion.div>
                   ))}
+
+                  {/* Auth Buttons */}
+                  <div className="pt-6 border-t border-[var(--card-border-color)] space-y-4">
+                    {authButtons.map((item, i) => (
+                      <motion.div
+                        key={item.path}
+                        initial={{
+                          opacity: 0,
+                          x: 30,
+                          filter: "blur(8px)",
+                        }}
+                        animate={{
+                          opacity: 1,
+                          x: 0,
+                          filter: "blur(0px)",
+                        }}
+                        exit={{
+                          opacity: 0,
+                          x: 30,
+                          filter: "blur(8px)",
+                        }}
+                        transition={{
+                          delay: (i + centerMenuItems.length) * 0.1 + 0.2,
+                          duration: 0.5,
+                          ease: [0.25, 0.1, 0.25, 1],
+                        }}
+                      >
+                        {item.variant === "primary" ? (
+                          <Link
+                            to={item.path}
+                            onClick={toggleMenu}
+                            className="block w-full text-center px-6 py-3 text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-lg font-medium transition-all duration-200 hover:opacity-90"
+                          >
+                            {item.label}
+                          </Link>
+                        ) : (
+                          <Link
+                            to={item.path}
+                            onClick={toggleMenu}
+                            className="block text-xl font-light text-[var(--primary-text-color)] transition-all duration-300 ease-out hover:translate-x-2 hover:text-[var(--gradient-start)]"
+                          >
+                            {item.label}
+                          </Link>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Footer */}
@@ -197,7 +293,7 @@ function Navbar() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.4 }}
-                  className="mt-auto pt-8 border-t border-gray-200 dark:border-white/10"
+                  className="mt-auto pt-8 border-t border-[var(--card-border-color)]"
                 >
                   <ThemeToggle />
                 </motion.div>
