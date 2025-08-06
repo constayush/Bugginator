@@ -24,7 +24,8 @@ function Teams() {
   const [joinTeamWithIDFormData, SetJoinTeamWithIDFormData] = useState({
     teamId: "",
   });
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, ] = useState(true);
+
 
   const [createTeamFormData, SetCreateTeamFormData] = useState({
     teamName: "",
@@ -62,6 +63,7 @@ function Teams() {
     },
   ];
   const [teamName, setTeamName] = useState(""); // Editable team name
+  console.log(teamName);
   const [teamId, setTeamId] = useState(""); // Editable team ID
   // Array of team members
   const roles = ["Admin", "Mod", "Member"];
@@ -317,7 +319,7 @@ function Teams() {
                         <select
                           className="border rounded px-2 py-1"
                           value={member.role}
-                          onChange={(e) => handleRoleChange(idx)}
+                          onChange={() => handleRoleChange(idx)}
                         >
                           {roles.map((role) => (
                             <option key={role} value={role}>
