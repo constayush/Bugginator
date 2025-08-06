@@ -334,7 +334,7 @@ export default function EnterpriseLanding() {
   return (
     <div className="min-h-screen bg-[var(--bg-color)]">
       {/* Hero Section */}
-      <section ref={heroRef} className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <section ref={heroRef} className="pt-24 pb-16 px-4 sm:px-6 lg:px-32">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -455,7 +455,7 @@ export default function EnterpriseLanding() {
 
       {/* Features Section */}
       <section id="features" ref={featuresRef} className="py-24 bg-[var(--container-color)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={featuresInView ? { opacity: 1, y: 0 } : {}}
@@ -559,7 +559,7 @@ export default function EnterpriseLanding() {
 
       {/* Pricing Section */}
       <section id="pricing" className="py-24 bg-[var(--container-color)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-[var(--card-bg-color)] border-[var(--card-border-color)] text-[var(--primary-text-color)]">Pricing</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--primary-text-color)]">
@@ -624,7 +624,7 @@ export default function EnterpriseLanding() {
 
       {/* FAQ Section */}
       <section id='faq' className="py-24 bg-[var(--bg-color)] ">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-32">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-[var(--container-color)] border-[var(--card-border-color)] text-[var(--primary-text-color)]">FAQ</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--primary-text-color)]">
