@@ -334,7 +334,7 @@ export default function EnterpriseLanding() {
   return (
     <div className="min-h-screen bg-[var(--bg-color)]">
       {/* Hero Section */}
-      <section ref={heroRef} className="pt-24 pb-16 px-4 sm:px-6 lg:px-32">
+      <section ref={heroRef} className="pt-10 pb-16 px-4 sm:px-6 md:pt-24 lg:px-32">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -348,7 +348,7 @@ export default function EnterpriseLanding() {
                   <Award className="h-3 w-3 mr-1" />
                   Trusted by Fortune 500 Companies
                 </Badge> */}
-                <h1 className="text-4xl md:text-6xl font-bold leading-tight text-[var(--primary-text-color)]">
+                <h1 className="text-5xl text-center md:text-left md:text-6xl font-bold leading-tight text-[var(--primary-text-color)]">
                   Effortless
                   <span className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
                     {' '}Bugginator

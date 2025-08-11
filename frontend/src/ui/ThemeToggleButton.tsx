@@ -19,7 +19,7 @@ function ThemeToggle() {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="relative w-14 h-7 rounded-full p-0.5 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+      className="relative w-14 h-7 rounded-full p-0.5 w-fit transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
       style={{
         backgroundColor: theme === "dark" ? "#374151" : "#e5e7eb",
       }}
@@ -42,7 +42,7 @@ function ThemeToggle() {
           backgroundColor: theme === "dark" ? "#1f2937" : "#ffffff",
         }}
         animate={{
-          x: theme === "dark" ? 28 : 0,
+          x: theme === "dark" ? 0 : 0,
         }}
         transition={{
           type: "spring",

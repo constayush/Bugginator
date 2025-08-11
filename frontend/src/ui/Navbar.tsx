@@ -19,9 +19,9 @@ function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   const centerMenuItems = [
-    { path: "#features", label: "Features" },
-    { path: "#pricing", label: "Pricing" },
-     {  path: "#faq",label: "FAQ" },
+    { path: "/#features", label: "Features" },
+    { path: "/#pricing", label: "Pricing" },
+     {  path: "/#faq",label: "FAQ" },
   ]
 
   const authButtons = [
@@ -36,10 +36,10 @@ function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0,  }}
         animate={{ y: 0, opacity: 1, }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`z-50 w-full transition-all duration-700 ease-out  ${scrolled ? "fixed top-0" : "static"}`}
+        transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+        className={`z-50 w-full bg-transparent  ${scrolled ? "fixed top-0" : "static"}`}
       >
-        <div className="max-w-[84rem] mx-auto  ">
+        <div className="max-w-[74.5rem] mx-auto ">
           <motion.div
             animate={{
               marginTop: scrolled ? "1.5rem" : "0rem",
@@ -49,7 +49,7 @@ function Navbar() {
               maxWidth: scrolled ? "fit-content" : "100%",
             }}
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            className={`backdrop-blur-xl transition-all duration-700 ease-out ${
+            className={`backdrop-blur-xl  ${
               scrolled
                 ? "bg-[var(--navbar-bg-color)] backdrop-blur-2xl rounded-full px-8 py-4 shadow-lg shadow-black/10 dark:shadow-white/5"
                 : "bg-transparent px-6 py-6 md:px-8 md:py-8"
@@ -65,11 +65,12 @@ function Navbar() {
               <motion.a
                 href="/"
                 whileHover={{ scale: 1.05 }}
+                initial={{ fontSize: ".1rem ", filter: "blur(10px)" }}
                 animate={{
-                  fontSize: scrolled ? "1.125rem" : "1.275rem",
+                  fontSize: scrolled ? "1.125rem" : "1.275rem", filter: "blur(0px)",
                 }}
                 transition={{
-                  duration: 0.7,
+                  duration: 1,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
                 className="font-bold bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent"
@@ -78,7 +79,7 @@ function Navbar() {
               </motion.a>
 
               {/* Desktop Menu */}
-              <div className="hidden md:flex items-center justify-between flex-1">
+              <div className="hidden lg:flex items-center justify-between flex-1">
                 {/* Center Navigation */}
                 <div className="flex items-center gap-8 mx-auto">
                   {centerMenuItems.map((item, i) => (
@@ -91,13 +92,14 @@ function Navbar() {
                         duration: 0.6,
                         ease: [0.25, 0.1, 0.25, 1],
                       }}
+                      
                     >
                       <a
                         href={item.path}
-                        className="font-medium text-sm text-[var(--primary-text-color)] transition-all duration-300 ease-out hover:scale-105 hover:text-[var(--gradient-start)] relative group"
+                        className="font-medium transition-colors text-sm text-[var(--primary-text-color)] hover:scale-105 hover:text-[var(--gradient-start)] relative group"
                       >
                         {item.label}
-                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute transition-all duration-300 -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] group-hover:w-full"></span>
                       </a>
                     </motion.div>
                   ))}
@@ -119,14 +121,15 @@ function Navbar() {
                       {item.variant === "primary" ? (
                         <Link
                           to={item.path}
-                          className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-lg transition-all duration-200 hover:opacity-90 hover:scale-105 shadow-sm"
+                          className="inline-flex whitespace-nowrap transition-colors
+ items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-lg  hover:opacity-90 hover:scale-105 shadow-sm"
                         >
                           {item.label}
                         </Link>
                       ) : (
                         <Link
                           to={item.path}
-                          className="inline-flex border ml-4 items-center justify-center px-4 py-2 text-sm font-medium text-[var(--primary-text-color)] transition-all duration-200 hover:bg-[var(--container-color)] rounded-lg hover:scale-105"
+                          className="inline-flex border ml-4 items-center justify-center px-4 py-2 text-sm font-medium text-[var(--primary-text-color)]  hover:bg-[var(--container-color)] rounded-lg hover:scale-105"
                         >
                           {item.label}
                         </Link>
@@ -151,7 +154,7 @@ function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMenu}
-                className={`md:hidden w-8 h-8 flex items-center justify-center transition-colors duration-300 text-[var(--primary-text-color)] hover:text-[var(--gradient-start)]`}
+                className={`lg:hidden w-8 h-8 flex items-center justify-center text-[var(--primary-text-color)] hover:text-[var(--gradient-start)]`}
               >
                 <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.3, ease: "easeOut" }}>
                   {isOpen ? <X size={18} /> : <Menu size={18} />}
@@ -172,7 +175,7 @@ function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:static lg:hidden"
               onClick={toggleMenu}
             />
             
@@ -233,7 +236,7 @@ function Navbar() {
                       <a
                         href={item.path}
                         onClick={toggleMenu}
-                        className="block text-xl font-light text-[var(--primary-text-color)] transition-all duration-300 ease-out hover:translate-x-2 hover:text-[var(--gradient-start)]"
+                        className="block transition-all text-xl font-light text-[var(--primary-text-color)] ease-out hover:translate-x-2 hover:text-[var(--gradient-start)]"
                       >
                         {item.label}
                       </a>
@@ -270,7 +273,7 @@ function Navbar() {
                           <Link
                             to={item.path}
                             onClick={toggleMenu}
-                            className="block w-full text-center px-6 py-3 text-white bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-lg font-medium transition-all duration-200 hover:opacity-90"
+                            className="block w-full text-center px-6 py-3 text-white bg-gradient-to-r transition-colors duration-300 from-[var(--gradient-start)] to-[var(--gradient-end)] hover:from-[var(--gradient-end)] hover:to-[var(--gradient-start)] rounded-lg font-medium hover:opacity-60"
                           >
                             {item.label}
                           </Link>
@@ -278,7 +281,7 @@ function Navbar() {
                           <Link
                             to={item.path}
                             onClick={toggleMenu}
-                            className="block text-xl font-light text-[var(--primary-text-color)] transition-all duration-300 ease-out hover:translate-x-2 hover:text-[var(--gradient-start)]"
+                            className="block transition-all rounded-lg text-center border-[var(--text-color)] bg-[#ffffff46] border-2 p-2 text-xl font-light text-[var(--primary-text-color)] hover:bg-[#ddb6f7a3] ease-out  "
                           >
                             {item.label}
                           </Link>
